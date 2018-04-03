@@ -15,11 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="res\GLFW\inc\glfw3.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -38,6 +33,9 @@
     <ClInclude Include="res\GLEW\inc\wglew.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\graphics\Window.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\GLFW\lib\glfw3.dll" />
@@ -47,5 +45,13 @@
     <Library Include="res\GLFW\lib\glfw3dll.lib" />
     <Library Include="res\GLEW\lib\glew32.lib" />
     <Library Include="res\GLEW\lib\glew32s.lib" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\Window.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

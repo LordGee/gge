@@ -132,7 +132,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\Main.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="src\graphics\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="res\GLEW\inc\eglew.h" />
@@ -141,6 +142,7 @@
     <ClInclude Include="res\GLEW\inc\wglew.h" />
     <ClInclude Include="res\GLFW\inc\glfw3.h" />
     <ClInclude Include="res\GLFW\inc\glfw3native.h" />
+    <ClInclude Include="src\graphics\Window.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\GLFW\lib\glfw3.dll" />
