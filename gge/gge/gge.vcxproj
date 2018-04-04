@@ -134,6 +134,7 @@
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="src\graphics\Window.cpp" />
+    <ClCompile Include="src\maths\Matrix.cpp" />
     <ClCompile Include="src\maths\Vector2.cpp" />
     <ClCompile Include="src\maths\Vector3.cpp" />
     <ClCompile Include="src\maths\Vector4.cpp" />
@@ -148,6 +149,7 @@
     <ClInclude Include="src\graphics\Window.h" />
     <ClInclude Include="src\maths\Mathematics.h" />
     <ClInclude Include="src\maths\Maths.h" />
+    <ClInclude Include="src\maths\Matrix.h" />
     <ClInclude Include="src\maths\Vector2.h" />
     <ClInclude Include="src\maths\Vector3.h" />
     <ClInclude Include="src\maths\Vector4.h" />
