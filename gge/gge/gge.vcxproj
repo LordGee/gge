@@ -134,6 +134,9 @@
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="src\graphics\Window.cpp" />
+    <ClCompile Include="src\maths\Vector2.cpp" />
+    <ClCompile Include="src\maths\Vector3.cpp" />
+    <ClCompile Include="src\maths\Vector4.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="res\GLEW\inc\eglew.h" />
@@ -143,6 +146,11 @@
     <ClInclude Include="res\GLFW\inc\glfw3.h" />
     <ClInclude Include="res\GLFW\inc\glfw3native.h" />
     <ClInclude Include="src\graphics\Window.h" />
+    <ClInclude Include="src\maths\Mathematics.h" />
+    <ClInclude Include="src\maths\Maths.h" />
+    <ClInclude Include="src\maths\Vector2.h" />
+    <ClInclude Include="src\maths\Vector3.h" />
+    <ClInclude Include="src\maths\Vector4.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\GLFW\lib\glfw3.dll" />

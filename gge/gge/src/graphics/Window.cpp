@@ -61,10 +61,15 @@ namespace gge
 		void Window::WindowUpdate() {
 			GLenum error = glGetError();
 			if (error != GL_NO_ERROR) {
-				std::cout << "OpenGL Error: " << error << std::endl;
+				std::cerr << "OpenGL Error: " << error << std::endl;
 			}
 			glfwPollEvents();
 			glfwSwapBuffers(m_Window);
+		}
+
+		void Window::WindowDestroy() {
+			glfwDestroyWindow(m_Window);
+			glfwTerminate();
 		}
 
 		void CallbackWindowResize(GLFWwindow * window, int width, int height) {
@@ -74,6 +79,9 @@ namespace gge
 		void CallbackKeyPress(GLFWwindow* window, int key, int scancode, int action, int mods) {
 			Window* win = (Window*)glfwGetWindowUserPointer(window);
 			win->m_Keys[key] = action != GLFW_RELEASE;
+			if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS) {
+				glfwSetWindowShouldClose(window, GLFW_TRUE);
+			}
 		}
 
 		void CallbackMouseButton(GLFWwindow * window, int button, int action, int mods) {
@@ -89,7 +97,7 @@ namespace gge
 
 		bool Window::IsKeyPressed(unsigned int keycode) {
 			if (keycode >= MAX_KEYS) {
-				std::cout << "Invalid Key Request (Out of range)" << std::endl;
+				std::cerr << "Invalid Key Request (Out of range)" << std::endl;
 				return false;
 			}
 			return m_Keys[keycode];
@@ -97,7 +105,7 @@ namespace gge
 
 		bool Window::IsMouseButtonPressed(unsigned button) {
 			if (button >= MAX_BUTTONS) {
-				std::cout << "Invalid Button Request (Out of range)" << std::endl;
+				std::cerr << "Invalid Button Request (Out of range)" << std::endl;
 				return false;
 			}
 			return m_MouseButtons[button];

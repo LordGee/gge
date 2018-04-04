@@ -27,6 +27,7 @@ namespace gge
 			bool IsClosed();
 			void WindowClear();
 			void WindowUpdate();
+			void WindowDestroy();
 
 		public:
 			bool IsKeyPressed(unsigned int keycode);

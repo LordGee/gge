@@ -1,6 +1,3 @@
-#include <glew.h>
-#include <glfw3.h>
-
 #include "src/graphics/Window.h"
 
 int main() {
@@ -15,8 +12,11 @@ int main() {
 	{
 		window.WindowClear();
 		/* Render here */
+		
+
 		window.WindowUpdate();
 	}
 
+	window.WindowDestroy();
 	return 0;
 }
