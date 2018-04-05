@@ -48,6 +48,7 @@ namespace gge
 			glUseProgram(0);
 		}
 
+		// todo: refactor to read from one file and seperate out the two shaders
 		GLuint Shader::Load() {
 			GLuint program = glCreateProgram();
 			GLuint vertex = glCreateShader(GL_VERTEX_SHADER);
