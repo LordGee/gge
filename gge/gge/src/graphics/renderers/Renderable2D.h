@@ -19,6 +19,9 @@ namespace gge
 			maths::Vector2			m_Size;
 			maths::Vector4			m_Colour;
 
+		protected:
+			Renderable2D() { }
+
 		public:
 			Renderable2D(maths::Vector3 position, maths::Vector2 size, maths::Vector4 colour)
 				: m_Position(position), m_Size(size), m_Colour(colour) { }

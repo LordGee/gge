@@ -4,6 +4,7 @@
 
 #include "src/graphics/layers/TileLayer.h"
 #include "src/graphics/renderers/Sprite.h"
+#include "src/graphics/layers/Group.h"
 
 int main() {
 
@@ -21,8 +22,8 @@ int main() {
 	shader.SetUniform2f("light_position", Vector2(4.0f, 1.5f));
 
 	TileLayer layer(&shader);
-
 	unsigned int count = 0;
+	/*
 	for (float y = -9.0f; y < 9.0f; y += 0.1f) {
 		for (float x = -16.0f; x < 16.0f; x += 0.1f) {
 			layer.Add(new Sprite
@@ -30,6 +31,17 @@ int main() {
 			count++;
 		}
 	}
+	*/
+	Group* group = new Group(Matrix::translation(Vector3(-15.0f, 5.0f, 0.0f)));
+	group->Add(new Sprite(0.0f, 0.0f, 6.0f, 3.0f, Vector4(1, 1, 1, 1)));
+
+	Group* button = new Group(Matrix::translation(Vector3(0.5f, 0.5f, 0.0f)));
+	button->Add(new Sprite(0.0f, 0.0f, 5.0f, 2.0f, Vector4(1, 0, 1, 1)));
+	button->Add(new Sprite(0.5f, 0.5f, 4.0f, 1.0f, Vector4(1, 1, 0, 1)));
+
+	group->Add(button);
+
+	layer.Add(group);
 
 	std::cout << "Sprites on screen: " << count << std::endl;
 
