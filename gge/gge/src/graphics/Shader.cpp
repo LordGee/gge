@@ -16,8 +16,16 @@ namespace gge
 			glUniform1f(GetUniformLocation(name), value);
 		}
 
+		void Shader::SetUniform1fv(const GLchar* name, int count, float* value) {
+			glUniform1fv(GetUniformLocation(name), count, value);
+		}
+
 		void Shader::SetUniform1i(const GLchar* name, int value) {
 			glUniform1i(GetUniformLocation(name), value);
+		}
+
+		void Shader::SetUniform1iv(const GLchar* name, int count, int* value) {
+			glUniform1iv(GetUniformLocation(name), count, value);
 		}
 
 		void Shader::SetUniform2f(const GLchar* name, const maths::Vector2& vec2) {

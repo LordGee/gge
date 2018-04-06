@@ -90,18 +90,30 @@
     <ClInclude Include="src\graphics\layers\Group.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="res\FreeImage\inc\FreeImage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\utilities\ImageLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\textures\Texture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\GLFW\lib\glfw3.dll" />
     <None Include="src\shaders\basic.shader" />
     <None Include="src\shaders\basic.frag" />
     <None Include="src\shaders\basic.vert" />
+    <None Include="res\FreeImage\bin\FreeImage.dll" />
+    <None Include="FreeImage.dll" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="res\GLFW\lib\glfw3.lib" />
     <Library Include="res\GLFW\lib\glfw3dll.lib" />
     <Library Include="res\GLEW\lib\glew32.lib" />
     <Library Include="res\GLEW\lib\glew32s.lib" />
+    <Library Include="res\FreeImage\lib\FreeImage.lib" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -149,5 +161,22 @@
     <ClCompile Include="src\graphics\layers\Group.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\graphics\textures\Texture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="img\test.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="img\test2.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="img\test3.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="img\test4.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

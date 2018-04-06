@@ -14,34 +14,39 @@ int main() {
 
 	Window window("GoodGame Engine", 1920, 1080);
 
-	Matrix orthographic = Matrix::orthographic(0.0f, 16.0f, 0.0f, 9.0f, -1.0f, 1.0f);
-	
 	Shader* s = new Shader("src/shaders/basic.vert", "src/shaders/basic.frag");
 	Shader& shader = *s;
 	shader.Enable();
 	shader.SetUniform2f("light_position", Vector2(4.0f, 1.5f));
 
+	GLint texIDs[] = {
+		0,1,2,3,4,5,6,7,8,9
+	};
+	shader.SetUniform1iv("textures", 10, texIDs);
+
+
 	TileLayer layer(&shader);
 	unsigned int count = 0;
-	/*
-	for (float y = -9.0f; y < 9.0f; y += 0.1f) {
-		for (float x = -16.0f; x < 16.0f; x += 0.1f) {
-			layer.Add(new Sprite
-			(x, y, 0.09f, 0.09f, Vector4(rand() % 1000 / 1000.0f, rand() % 1000 / 1000.0f, rand() % 1000 / 1000.0f, 1)));
+
+	Texture* textures[] = {
+		new Texture("img/test.png"),
+		new Texture("img/test2.png"),
+		new Texture("img/test3.png"),
+		new Texture("img/test4.png")
+	};
+
+	for (float y = -9.0f; y < 9.0f; y++) {
+		for (float x = -16.0f; x < 16.0f; x++) {
+			if (rand() % 4 == 0) {
+				layer.Add(new Sprite(x, y, 0.9f, 0.9f, Vector4(rand() % 1000 / 1000.0f, rand() % 1000 / 1000.0f, rand() % 1000 / 1000.0f, 1)));
+			}
+			else {
+				layer.Add(new Sprite(x, y, 0.9f, 0.9f, textures[rand() % 4]));
+			}
+
 			count++;
 		}
 	}
-	*/
-	Group* group = new Group(Matrix::translation(Vector3(-15.0f, 5.0f, 0.0f)));
-	group->Add(new Sprite(0.0f, 0.0f, 6.0f, 3.0f, Vector4(1, 1, 1, 1)));
-
-	Group* button = new Group(Matrix::translation(Vector3(0.5f, 0.5f, 0.0f)));
-	button->Add(new Sprite(0.0f, 0.0f, 5.0f, 2.0f, Vector4(1, 0, 1, 1)));
-	button->Add(new Sprite(0.5f, 0.5f, 4.0f, 1.0f, Vector4(1, 1, 0, 1)));
-
-	group->Add(button);
-
-	layer.Add(group);
 
 	std::cout << "Sprites on screen: " << count << std::endl;
 
@@ -63,6 +68,11 @@ int main() {
 		layer.Render();
 
 		window.WindowUpdate();
+	}
+
+	for (int i = 0; i < 4; i++)
+	{
+		delete textures[i];
 	}
 
 	window.WindowDestroy();

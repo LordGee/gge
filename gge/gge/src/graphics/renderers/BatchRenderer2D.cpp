@@ -20,10 +20,17 @@ namespace gge
 			glBindVertexArray(m_VAO);
 			glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
 			glBufferData(GL_ARRAY_BUFFER, RENDERER_BUFFER_SIZE, NULL, GL_DYNAMIC_DRAW);
+			
 			glEnableVertexAttribArray(SHADER_VERTEX_INDEX);
+			glEnableVertexAttribArray(SHADER_UV_INDEX);
+			glEnableVertexAttribArray(SHADER_TID_INDEX);
 			glEnableVertexAttribArray(SHADER_COLOUR_INDEX);
+			
 			glVertexAttribPointer(SHADER_VERTEX_INDEX, 3, GL_FLOAT, GL_FALSE, RENDERER_VERTEX_SIZE, (const GLvoid*)0);
+			glVertexAttribPointer(SHADER_UV_INDEX, 2, GL_FLOAT, GL_FALSE, RENDERER_VERTEX_SIZE, (const GLvoid*)(offsetof(VertexData, VertexData::textureCoord)));
+			glVertexAttribPointer(SHADER_TID_INDEX, 1, GL_FLOAT, GL_FALSE, RENDERER_VERTEX_SIZE, (const GLvoid*)(offsetof(VertexData, VertexData::textureID)));
 			glVertexAttribPointer(SHADER_COLOUR_INDEX, 4, GL_UNSIGNED_BYTE, GL_TRUE, RENDERER_VERTEX_SIZE, (const GLvoid*)(offsetof(VertexData, VertexData::colour)));
+
 			glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 			GLuint* indicies = new GLuint[RENDERER_INDICES_SIZE];
@@ -52,27 +59,58 @@ namespace gge
 			const maths::Vector3& position = renderable->GetPosition();
 			const maths::Vector2& size = renderable->GetSize();
 			const maths::Vector4& colour = renderable->GetColour();
-
-			// Optermisation improvements
-			int r = colour.x * 255.0f;
-			int g = colour.y * 255.0f;
-			int b = colour.z * 255.0f;
-			int a = colour.w * 255.0f;
-			unsigned int c = a << 24 | b << 16 | g << 8 | r;
+			const std::vector<maths::Vector2>& uv = renderable->GetUV();
+			const GLuint textureID = renderable->GetTextureID();
+			unsigned int c = 0;
+			
+			float textureSlot = 0.0f;
+			if (textureID > 0) {
+				bool found = false;
+				for (int i = 0; i < m_TextureSlots.size(); i++) {
+					if (m_TextureSlots[i] == textureID) {
+						textureSlot = (float)(i + 1);
+						found = true;
+						break;
+					}
+				}
+				if (!found) {
+					if (m_TextureSlots.size() >= 32) {
+						End();
+						Flush();
+						Begin();
+					}
+					m_TextureSlots.push_back(textureID);
+					textureSlot = (float)m_TextureSlots.size();
+				}
+			} else {
+				int r = colour.x * 255.0f;
+				int g = colour.y * 255.0f;
+				int b = colour.z * 255.0f;
+				int a = colour.w * 255.0f;
+				c = a << 24 | b << 16 | g << 8 | r;
+			}
 
 			m_Buffer->vertex = *m_TransformationBack * position;
+			m_Buffer->textureCoord = uv[0];
+			m_Buffer->textureID = textureSlot;
 			m_Buffer->colour = c;
 			m_Buffer++;
 
 			m_Buffer->vertex = *m_TransformationBack * maths::Vector3(position.x, position.y + size.y, position.z);
+			m_Buffer->textureCoord = uv[1];
+			m_Buffer->textureID = textureSlot;
 			m_Buffer->colour = c;
 			m_Buffer++;
 
 			m_Buffer->vertex = *m_TransformationBack * maths::Vector3(position.x + size.x, position.y + size.y, position.z);
+			m_Buffer->textureCoord = uv[2];
+			m_Buffer->textureID = textureSlot;
 			m_Buffer->colour = c;
 			m_Buffer++;
 
 			m_Buffer->vertex = *m_TransformationBack * maths::Vector3(position.x + size.x, position.y, position.z);
+			m_Buffer->textureCoord = uv[3];
+			m_Buffer->textureID = textureSlot;
 			m_Buffer->colour = c;
 			m_Buffer++;
 
@@ -85,6 +123,12 @@ namespace gge
 		}
 
 		void BatchRenderer2D::Flush() {
+
+			for (int i = 0; i < m_TextureSlots.size(); i++) {
+				glActiveTexture(GL_TEXTURE0 + i);
+				glBindTexture(GL_TEXTURE_2D, m_TextureSlots[i]);
+			}
+
 			glBindVertexArray(m_VAO);
 			m_IBO->BindIndexBuffer();
 
