@@ -83,8 +83,8 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)gge\res\GLFW\inc;$(SolutionDir)gge\res\GLEW\inc;$(SolutionDir)gge\res\FreeImage\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>GLEW_STATIC;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)gge\res\GLFW\inc;$(SolutionDir)gge\res\GLEW\inc;$(SolutionDir)gge\res\FreeImage\inc;$(SolutionDir)gge\ext\FreeType\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>GLEW_STATIC;_MBCS;WIN32;_LIB;FT2_BUILD_LIBRARY;_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(SolutionDir)gge\res\GLFW\lib;$(SolutionDir)gge\res\GLEW\lib;$(SolutionDir)gge\res\FreeImage\lib</AdditionalLibraryDirectories>
@@ -107,8 +107,8 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)gge\res\GLFW\inc;$(SolutionDir)gge\res\GLEW\inc;$(SolutionDir)gge\res\FreeImage\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>GLEW_STATIC;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)gge\res\GLFW\inc;$(SolutionDir)gge\res\GLEW\inc;$(SolutionDir)gge\res\FreeImage\inc;$(SolutionDir)gge\ext\FreeType\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_MBCS;WIN32;NDEBUG;_LIB;FT2_BUILD_LIBRARY;GLEW_STATIC;_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -132,6 +132,54 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ext\FreeType-GL\src\distance-field.c" />
+    <ClCompile Include="ext\FreeType-GL\src\edtaa3func.c" />
+    <ClCompile Include="ext\FreeType-GL\src\platform.c" />
+    <ClCompile Include="ext\FreeType-GL\src\texture-atlas.c" />
+    <ClCompile Include="ext\FreeType-GL\src\texture-font.c" />
+    <ClCompile Include="ext\FreeType-GL\src\utf8-utils.c" />
+    <ClCompile Include="ext\FreeType-GL\src\vector.c" />
+    <ClCompile Include="ext\FreeType\src\autofit\autofit.c" />
+    <ClCompile Include="ext\FreeType\src\base\ftbase.c" />
+    <ClCompile Include="ext\FreeType\src\base\ftbbox.c" />
+    <ClCompile Include="ext\FreeType\src\base\ftbdf.c" />
+    <ClCompile Include="ext\FreeType\src\base\ftbitmap.c" />
+    <ClCompile Include="ext\FreeType\src\base\ftcid.c" />
+    <ClCompile Include="ext\FreeType\src\base\ftdebug.c" />
+    <ClCompile Include="ext\FreeType\src\base\ftfntfmt.c" />
+    <ClCompile Include="ext\FreeType\src\base\ftfstype.c" />
+    <ClCompile Include="ext\FreeType\src\base\ftgasp.c" />
+    <ClCompile Include="ext\FreeType\src\base\ftglyph.c" />
+    <ClCompile Include="ext\FreeType\src\base\ftgxval.c" />
+    <ClCompile Include="ext\FreeType\src\base\ftinit.c" />
+    <ClCompile Include="ext\FreeType\src\base\ftlcdfil.c" />
+    <ClCompile Include="ext\FreeType\src\base\ftmm.c" />
+    <ClCompile Include="ext\FreeType\src\base\ftotval.c" />
+    <ClCompile Include="ext\FreeType\src\base\ftpatent.c" />
+    <ClCompile Include="ext\FreeType\src\base\ftpfr.c" />
+    <ClCompile Include="ext\FreeType\src\base\ftstroke.c" />
+    <ClCompile Include="ext\FreeType\src\base\ftsynth.c" />
+    <ClCompile Include="ext\FreeType\src\base\ftsystem.c" />
+    <ClCompile Include="ext\FreeType\src\base\fttype1.c" />
+    <ClCompile Include="ext\FreeType\src\base\ftwinfnt.c" />
+    <ClCompile Include="ext\FreeType\src\bdf\bdf.c" />
+    <ClCompile Include="ext\FreeType\src\cache\ftcache.c" />
+    <ClCompile Include="ext\FreeType\src\cff\cff.c" />
+    <ClCompile Include="ext\FreeType\src\cid\type1cid.c" />
+    <ClCompile Include="ext\FreeType\src\gzip\ftgzip.c" />
+    <ClCompile Include="ext\FreeType\src\lzw\ftlzw.c" />
+    <ClCompile Include="ext\FreeType\src\pcf\pcf.c" />
+    <ClCompile Include="ext\FreeType\src\pfr\pfr.c" />
+    <ClCompile Include="ext\FreeType\src\psaux\psaux.c" />
+    <ClCompile Include="ext\FreeType\src\pshinter\pshinter.c" />
+    <ClCompile Include="ext\FreeType\src\psnames\psmodule.c" />
+    <ClCompile Include="ext\FreeType\src\raster\raster.c" />
+    <ClCompile Include="ext\FreeType\src\sfnt\sfnt.c" />
+    <ClCompile Include="ext\FreeType\src\smooth\smooth.c" />
+    <ClCompile Include="ext\FreeType\src\truetype\truetype.c" />
+    <ClCompile Include="ext\FreeType\src\type1\type1.c" />
+    <ClCompile Include="ext\FreeType\src\type42\type42.c" />
+    <ClCompile Include="ext\FreeType\src\winfonts\winfnt.c" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="src\graphics\buffers\Buffer.cpp" />
     <ClCompile Include="src\graphics\buffers\IndexBuffer.cpp" />
@@ -150,6 +198,22 @@
     <ClCompile Include="src\maths\Vector4.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ext\FreeType-GL\src\distance-field.h" />
+    <ClInclude Include="ext\FreeType-GL\src\edtaa3func.h" />
+    <ClInclude Include="ext\FreeType-GL\src\freetype-gl.h" />
+    <ClInclude Include="ext\FreeType-GL\src\opengl.h" />
+    <ClInclude Include="ext\FreeType-GL\src\platform.h" />
+    <ClInclude Include="ext\FreeType-GL\src\texture-atlas.h" />
+    <ClInclude Include="ext\FreeType-GL\src\texture-font.h" />
+    <ClInclude Include="ext\FreeType-GL\src\utf8-utils.h" />
+    <ClInclude Include="ext\FreeType-GL\src\vec234.h" />
+    <ClInclude Include="ext\FreeType-GL\src\vector.h" />
+    <ClInclude Include="ext\FreeType\include\freetype\config\ftconfig.h" />
+    <ClInclude Include="ext\FreeType\include\freetype\config\ftheader.h" />
+    <ClInclude Include="ext\FreeType\include\freetype\config\ftmodule.h" />
+    <ClInclude Include="ext\FreeType\include\freetype\config\ftoption.h" />
+    <ClInclude Include="ext\FreeType\include\freetype\config\ftstdlib.h" />
+    <ClInclude Include="ext\FreeType\include\ft2build.h" />
     <ClInclude Include="res\FreeImage\inc\FreeImage.h" />
     <ClInclude Include="res\GLEW\inc\eglew.h" />
     <ClInclude Include="res\GLEW\inc\glew.h" />
