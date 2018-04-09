@@ -4,6 +4,7 @@ namespace gge
 {
 	namespace graphics
 	{
+		/*
 		Buffer::Buffer(GLfloat* data, GLsizei count, GLuint componentCount)
 			: m_ComponentCount(componentCount) {
 			glGenBuffers(1, &m_BufferID);
@@ -23,5 +24,6 @@ namespace gge
 		void Buffer::UnbindBuffer() const {
 			glBindBuffer(GL_ARRAY_BUFFER, 0);
 		}
+		*/
 	}
 }

@@ -54,9 +54,6 @@
     <ClInclude Include="res\GLEW\inc\wglew.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\graphics\Window.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\maths\Vector2.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -73,9 +70,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\maths\Matrix.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\graphics\Shader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\utilities\FileReader.h">
@@ -168,6 +162,15 @@
     <ClInclude Include="ext\FreeType-GL\src\vector.h">
       <Filter>Header Files\External\FreeType-GL</Filter>
     </ClInclude>
+    <ClInclude Include="src\graphics\shaders\Shader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\windows\Window.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gge.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\GLFW\lib\glfw3.dll" />
@@ -176,6 +179,7 @@
     <None Include="src\shaders\basic.vert" />
     <None Include="res\FreeImage\bin\FreeImage.dll" />
     <None Include="FreeImage.dll" />
+    <None Include="src\shaders\light.frag" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="res\GLFW\lib\glfw3.lib" />
@@ -188,9 +192,6 @@
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\graphics\Window.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\maths\Vector2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -201,9 +202,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\maths\Matrix.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\graphics\Shader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\graphics\buffers\Buffer.cpp">
@@ -376,6 +374,12 @@
     </ClCompile>
     <ClCompile Include="ext\FreeType-GL\src\vector.c">
       <Filter>Source Files\External\FreeType-GL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\shaders\Shader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\windows\Window.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

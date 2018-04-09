@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../../maths/Maths.h"
-#include "../Shader.h"
+#include "../shaders/Shader.h"
 #include "Renderer2D.h"
 #include "../textures/Texture.h"
 

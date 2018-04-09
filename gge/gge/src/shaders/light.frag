@@ -23,6 +23,6 @@ void main() {
 		texColor = texture(textures[tid], fs_in.uv);
 	}
 
-	color = texColor;
+	color = texColor * intensity;
 
 };

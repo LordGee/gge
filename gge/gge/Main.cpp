@@ -1,10 +1,4 @@
-#include "src/graphics/Window.h"
-#include "src/maths/Maths.h"
-#include "src/graphics/Shader.h"
-
-#include "src/graphics/layers/TileLayer.h"
-#include "src/graphics/renderers/Sprite.h"
-#include "src/graphics/layers/Group.h"
+#include "src/gge.h"
 
 int main() {
 
@@ -12,21 +6,18 @@ int main() {
 	using namespace graphics;
 	using namespace maths;
 
-	Window window("GoodGame Engine", 1920, 1080);
-
-	Shader* s = new Shader("src/shaders/basic.vert", "src/shaders/basic.frag");
+	const int width = 1280, height = 720;
+	Window window("GG Engine", width, height);
+	Shader* s = new Shader(GGE_SHADER_BASIC_VERT, GGE_SHADER_BASIC_FRAG_LIGHT);
 	Shader& shader = *s;
-	shader.Enable();
-	shader.SetUniform2f("light_position", Vector2(4.0f, 1.5f));
+	TileLayer layer(&shader);
 
 	GLint texIDs[] = {
 		0,1,2,3,4,5,6,7,8,9
 	};
-	shader.SetUniform1iv("textures", 10, texIDs);
 
-
-	TileLayer layer(&shader);
-	unsigned int count = 0;
+	shader.Enable();
+	shader.SetUniform1iv(GGE_SHADER_TEXTURES, 10, texIDs);
 
 	Texture* textures[] = {
 		new Texture("img/test.png"),
@@ -35,46 +26,45 @@ int main() {
 		new Texture("img/test4.png")
 	};
 
-	for (float y = -9.0f; y < 9.0f; y++) {
-		for (float x = -16.0f; x < 16.0f; x++) {
+	int counter = 0;
+	srand(0);
+	for (float y = -9.0f; y < 9.0f; y += 0.5) {
+		for (float x = -16.0f; x < 16.0f; x += 0.5) {
 			if (rand() % 4 == 0) {
-				layer.Add(new Sprite(x, y, 0.9f, 0.9f, Vector4(rand() % 1000 / 1000.0f, rand() % 1000 / 1000.0f, rand() % 1000 / 1000.0f, 1)));
+				layer.Add(new Sprite(x, y, 0.4f, 0.4f, 
+					Vector4(rand() % 1000 / 1000.0f, 
+						rand() % 1000 / 1000.0f, 
+						rand() % 1000 / 1000.0f, 1)));
+			} else {
+				layer.Add(new Sprite(x, y, 0.4f, 0.4f, 
+					textures[rand() % 4]));
 			}
-			else {
-				layer.Add(new Sprite(x, y, 0.9f, 0.9f, textures[rand() % 4]));
-			}
-
-			count++;
+			counter++;
 		}
 	}
 
-	std::cout << "Sprites on screen: " << count << std::endl;
+	std::cout << "Sprites drawn : " << counter << std::endl;
+
+	double x = 0.0, y = 0.0;
 
 	// todo: Create Timer
-
-	/* Loop until the user closes the window */
 	while (!window.IsClosed())
 	{
 		window.WindowClear();
-
-		double x, y;
-		window.GetMousePos(x, y);
-
 		shader.Enable();
-		shader.SetUniform2f("light_pos", 
-			Vector2(static_cast<float>(x * 32.0f / 1920.0f - 16.0f), 
-				static_cast<float>(9.0f - y * 18.0f / 1080.0f)));
-
+		window.GetMousePos(x, y);
+		shader.SetUniform2f(GGE_SHADER_LIGHT_POS, 
+			MouseWorldPosition(x, y, (float)width, (float)height));
 		layer.Render();
-
 		window.WindowUpdate();
 	}
 
-	for (int i = 0; i < 4; i++)
-	{
+	for (int i = 0; i < 4; i++) {
 		delete textures[i];
 	}
 
 	window.WindowDestroy();
-	return 0;
+
+
+
 }

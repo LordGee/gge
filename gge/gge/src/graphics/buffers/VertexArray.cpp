@@ -4,6 +4,7 @@ namespace gge
 {
 	namespace graphics
 	{
+		/*
 		VertexArray::VertexArray() {
 			glGenVertexArrays(1, &m_ArrayID);
 		}
@@ -25,11 +26,12 @@ namespace gge
 		}
 
 		void VertexArray::BindVertexArray() const { 
-			glBindVertexArray(m_ArrayID);
+			//glBindVertexArray(m_ArrayID);
 		}
 
 		void VertexArray::UnbindVertexArray() const { 
 			glBindVertexArray(0);
 		}
+		*/
 	}
 }

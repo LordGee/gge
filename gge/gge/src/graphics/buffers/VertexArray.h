@@ -7,6 +7,7 @@ namespace gge
 {
 	namespace graphics
 	{
+		/*
 		class VertexArray {
 		private:
 			GLuint					m_ArrayID;
@@ -20,5 +21,6 @@ namespace gge
 			void BindVertexArray() const;
 			void UnbindVertexArray() const;
 		};
+		*/
 	}
 }

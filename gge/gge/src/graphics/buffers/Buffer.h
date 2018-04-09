@@ -6,6 +6,7 @@ namespace gge
 {
 	namespace graphics
 	{
+		/*
 		class Buffer {
 		private:
 			GLuint			m_BufferID;
@@ -19,5 +20,6 @@ namespace gge
 
 			GLuint GetComponentCount() const { return m_ComponentCount; }
 		};
+		*/
 	}
 }

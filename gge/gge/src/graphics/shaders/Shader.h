@@ -1,8 +1,8 @@
 #pragma once
 
 #include <glew.h>
-#include "../maths/Maths.h"
-#include "../utilities/FileReader.h"
+#include "../../maths/Maths.h"
+#include "../../utilities/FileReader.h"
 #include <vector>
 #include <iostream>
 

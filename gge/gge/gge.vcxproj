@@ -189,9 +189,9 @@
     <ClCompile Include="src\graphics\layers\TileLayer.cpp" />
     <ClCompile Include="src\graphics\renderers\BatchRenderer2D.cpp" />
     <ClCompile Include="src\graphics\renderers\Sprite.cpp" />
-    <ClCompile Include="src\graphics\Shader.cpp" />
+    <ClCompile Include="src\graphics\shaders\Shader.cpp" />
     <ClCompile Include="src\graphics\textures\Texture.cpp" />
-    <ClCompile Include="src\graphics\Window.cpp" />
+    <ClCompile Include="src\graphics\windows\Window.cpp" />
     <ClCompile Include="src\maths\Matrix.cpp" />
     <ClCompile Include="src\maths\Vector2.cpp" />
     <ClCompile Include="src\maths\Vector3.cpp" />
@@ -221,6 +221,7 @@
     <ClInclude Include="res\GLEW\inc\wglew.h" />
     <ClInclude Include="res\GLFW\inc\glfw3.h" />
     <ClInclude Include="res\GLFW\inc\glfw3native.h" />
+    <ClInclude Include="src\gge.h" />
     <ClInclude Include="src\graphics\buffers\Buffer.h" />
     <ClInclude Include="src\graphics\buffers\IndexBuffer.h" />
     <ClInclude Include="src\graphics\buffers\VertexArray.h" />
@@ -231,9 +232,9 @@
     <ClInclude Include="src\graphics\renderers\Renderable2D.h" />
     <ClInclude Include="src\graphics\renderers\Renderer2D.h" />
     <ClInclude Include="src\graphics\renderers\Sprite.h" />
-    <ClInclude Include="src\graphics\Shader.h" />
+    <ClInclude Include="src\graphics\shaders\Shader.h" />
     <ClInclude Include="src\graphics\textures\Texture.h" />
-    <ClInclude Include="src\graphics\Window.h" />
+    <ClInclude Include="src\graphics\windows\Window.h" />
     <ClInclude Include="src\maths\Mathematics.h" />
     <ClInclude Include="src\maths\Maths.h" />
     <ClInclude Include="src\maths\Matrix.h" />
@@ -250,6 +251,7 @@
     <None Include="src\shaders\basic.frag" />
     <None Include="src\shaders\basic.shader" />
     <None Include="src\shaders\basic.vert" />
+    <None Include="src\shaders\light.frag" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="res\FreeImage\lib\FreeImage.lib" />
