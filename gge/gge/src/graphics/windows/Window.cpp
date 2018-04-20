@@ -14,6 +14,16 @@ namespace gge
 			if (!Init()) { // Initialise new window
 				glfwTerminate();
 			}
+			for (int i = 0; i < MAX_KEYS; i++) {
+				m_Keys[i] = false;
+				m_KeyState[i] = false;
+				m_KeyHeld[i] = false;
+			}
+			for (int i = 0; i < MAX_BUTTONS; i++) {
+				m_MouseButtons[i] = false;
+				m_MouseState[i] = false;
+				m_MouseHeld[i] = false;
+			}
 		}
 
 		Window::~Window() {
@@ -36,7 +46,8 @@ namespace gge
 			glfwSetWindowUserPointer(m_Window, this);
 
 			// Init callbacks for resize and inputs related to the Window.
-			glfwSetWindowSizeCallback(m_Window, CallbackWindowResize);
+			//glfwSetWindowSizeCallback(m_Window, CallbackWindowResize);
+			glfwSetFramebufferSizeCallback(m_Window, CallbackWindowResize);
 			glfwSetKeyCallback(m_Window, CallbackKeyPress);
 			glfwSetMouseButtonCallback(m_Window, CallbackMouseButton);
 			glfwSetCursorPosCallback(m_Window, CallbackMouseCursorPosition);
@@ -59,6 +70,16 @@ namespace gge
 		}
 
 		void Window::WindowUpdate() {
+			for (int i = 0; i < MAX_KEYS; i++) {
+				m_KeyHeld[i] = m_Keys[i] && !m_KeyState[i];
+			}
+			memcpy(m_KeyState, m_Keys, MAX_KEYS * sizeof(bool));
+
+			for (int i = 0; i < MAX_BUTTONS; i++) {
+				m_MouseHeld[i] = m_MouseButtons[i] && !m_MouseState[i];
+			}
+			memcpy(m_MouseState, m_MouseButtons, MAX_BUTTONS * sizeof(bool));
+
 			GLenum error = glGetError();
 			if (error != GL_NO_ERROR) {
 				std::cerr << "OpenGL Error: " << error << std::endl;
@@ -74,6 +95,9 @@ namespace gge
 
 		void CallbackWindowResize(GLFWwindow * window, int width, int height) {
 			glViewport(0, 0, width, height);
+			Window* win = (Window*)glfwGetWindowUserPointer(window);
+			win->m_Width = width;
+			win->m_Height = height;
 		}
 
 		void CallbackKeyPress(GLFWwindow* window, int key, int scancode, int action, int mods) {
@@ -103,12 +127,28 @@ namespace gge
 			return m_Keys[keycode];
 		}
 
-		bool Window::IsMouseButtonPressed(unsigned button) {
+		bool Window::IsKeyHeld(unsigned int keycode) {
+			if (keycode >= MAX_KEYS) {
+				std::cerr << "Invalid Key Request (Out of range)" << std::endl;
+				return false;
+			}
+			return m_KeyHeld[keycode];
+		}
+
+		bool Window::IsMouseButtonPressed(unsigned int button) {
 			if (button >= MAX_BUTTONS) {
 				std::cerr << "Invalid Button Request (Out of range)" << std::endl;
 				return false;
 			}
 			return m_MouseButtons[button];
+		}
+
+		bool Window::IsMouseButtonDown(unsigned int button) {
+			if (button >= MAX_BUTTONS) {
+				std::cerr << "Invalid Button Request (Out of range)" << std::endl;
+				return false;
+			}
+			return m_MouseHeld[button];
 		}
 
 		void Window::GetMousePos(double & xpos, double & ypos) {

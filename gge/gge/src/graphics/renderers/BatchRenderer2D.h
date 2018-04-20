@@ -2,7 +2,7 @@
 
 #include <glew.h>
 #include "Renderer2D.h"
-#include "Renderable2D.h"
+#include "../renderables/Renderable2D.h"
 #include "../buffers/IndexBuffer.h"
 
 namespace gge

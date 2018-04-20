@@ -36,6 +36,7 @@ namespace gge
 			static Matrix translation(const maths::Vector3& translation);
 			static Matrix rotation(float angle, const maths::Vector3& axis);
 			static Matrix scale(const maths::Vector3& scale);
+			Matrix& invert();
 		};
 	}
 }

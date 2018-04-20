@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../renderers/Renderable2D.h"
+#include "../renderables/Renderable2D.h"
 
 namespace gge
 {
@@ -13,6 +13,7 @@ namespace gge
 
 		public:
 			Group(const maths::Matrix& transform);
+			~Group();
 			void Add(Renderable2D* renderable);
 			void Submit(Renderer2D* renderer) const override;
 		};

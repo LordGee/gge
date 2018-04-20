@@ -188,7 +188,7 @@
     <ClCompile Include="src\graphics\layers\Layer.cpp" />
     <ClCompile Include="src\graphics\layers\TileLayer.cpp" />
     <ClCompile Include="src\graphics\renderers\BatchRenderer2D.cpp" />
-    <ClCompile Include="src\graphics\renderers\Sprite.cpp" />
+    <ClCompile Include="src\graphics\renderables\Sprite.cpp" />
     <ClCompile Include="src\graphics\shaders\Shader.cpp" />
     <ClCompile Include="src\graphics\textures\Texture.cpp" />
     <ClCompile Include="src\graphics\windows\Window.cpp" />
@@ -229,9 +229,9 @@
     <ClInclude Include="src\graphics\layers\Layer.h" />
     <ClInclude Include="src\graphics\layers\TileLayer.h" />
     <ClInclude Include="src\graphics\renderers\BatchRenderer2D.h" />
-    <ClInclude Include="src\graphics\renderers\Renderable2D.h" />
+    <ClInclude Include="src\graphics\renderables\Renderable2D.h" />
     <ClInclude Include="src\graphics\renderers\Renderer2D.h" />
-    <ClInclude Include="src\graphics\renderers\Sprite.h" />
+    <ClInclude Include="src\graphics\renderables\Sprite.h" />
     <ClInclude Include="src\graphics\shaders\Shader.h" />
     <ClInclude Include="src\graphics\textures\Texture.h" />
     <ClInclude Include="src\graphics\windows\Window.h" />
@@ -243,6 +243,7 @@
     <ClInclude Include="src\maths\Vector4.h" />
     <ClInclude Include="src\utilities\FileReader.h" />
     <ClInclude Include="src\utilities\ImageLoader.h" />
+    <ClInclude Include="src\utilities\Timer.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="FreeImage.dll" />

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../renderers/Renderer2D.h"
-#include "../renderers/Renderable2D.h"
+#include "../renderables/Renderable2D.h"
 
 namespace gge
 {
@@ -21,6 +21,7 @@ namespace gge
 			virtual void Add(Renderable2D* renderable);
 			virtual void Render();
 
+			inline const std::vector<Renderable2D*>& GetRenderables() const { return m_Renderables; }
 		};
 	}
 }

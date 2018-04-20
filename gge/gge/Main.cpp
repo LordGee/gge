@@ -31,10 +31,9 @@ int main() {
 	for (float y = -9.0f; y < 9.0f; y += 0.5) {
 		for (float x = -16.0f; x < 16.0f; x += 0.5) {
 			if (rand() % 4 == 0) {
-				layer.Add(new Sprite(x, y, 0.4f, 0.4f, 
-					Vector4(rand() % 1000 / 1000.0f, 
-						rand() % 1000 / 1000.0f, 
-						rand() % 1000 / 1000.0f, 1)));
+				int r = rand() % 256;
+				int colour = 0xff00 << 8 | r;
+				layer.Add(new Sprite(x, y, 0.4f, 0.4f, colour));
 			} else {
 				layer.Add(new Sprite(x, y, 0.4f, 0.4f, 
 					textures[rand() % 4]));
@@ -47,16 +46,46 @@ int main() {
 
 	double x = 0.0, y = 0.0;
 
-	// todo: Create Timer
+	Timer timer;
+	float timeCount = 0.0f;
+	int frameCount = 0;
+
 	while (!window.IsClosed())
 	{
 		window.WindowClear();
 		shader.Enable();
+
+		timeCount += timer.Elapsed();
+		timer.Reset();
+		frameCount++;
+		if (timeCount >= 1.0f) {
+			std::cout << "FPS: " << frameCount << std::endl;
+			frameCount = 0;
+			timeCount = 0.0f;
+
+
+			int r = rand() % 256;
+			int colour = 0xff00 << 8 | r;
+
+			const std::vector<Renderable2D*>& rs = layer.GetRenderables();
+			for (int i = 0; i < rs.size(); i++) {
+				rs[i]->SetColour(colour);
+			}
+
+
+		}
+		
+		
+		if (window.IsMouseButtonDown(GLFW_MOUSE_BUTTON_LEFT)) {
+			std::cout << "Clicked" << std::endl;
+		}
+
 		window.GetMousePos(x, y);
 		shader.SetUniform2f(GGE_SHADER_LIGHT_POS, 
-			MouseWorldPosition(x, y, (float)width, (float)height));
+			MouseWorldPosition(x, y, static_cast<float>(window.GetWidth()), static_cast<float>(window.GetHeight())));
 		layer.Render();
 		window.WindowUpdate();
+		
 	}
 
 	for (int i = 0; i < 4; i++) {

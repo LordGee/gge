@@ -58,10 +58,9 @@ namespace gge
 		void BatchRenderer2D::Submit(const Renderable2D* renderable) {
 			const maths::Vector3& position = renderable->GetPosition();
 			const maths::Vector2& size = renderable->GetSize();
-			const maths::Vector4& colour = renderable->GetColour();
+			const unsigned int colour = renderable->GetColour();
 			const std::vector<maths::Vector2>& uv = renderable->GetUV();
 			const GLuint textureID = renderable->GetTextureID();
-			unsigned int c = 0;
 			
 			float textureSlot = 0.0f;
 			if (textureID > 0) {
@@ -82,36 +81,30 @@ namespace gge
 					m_TextureSlots.push_back(textureID);
 					textureSlot = (float)m_TextureSlots.size();
 				}
-			} else {
-				int r = colour.x * 255.0f;
-				int g = colour.y * 255.0f;
-				int b = colour.z * 255.0f;
-				int a = colour.w * 255.0f;
-				c = a << 24 | b << 16 | g << 8 | r;
-			}
+			} 
 
 			m_Buffer->vertex = *m_TransformationBack * position;
 			m_Buffer->textureCoord = uv[0];
 			m_Buffer->textureID = textureSlot;
-			m_Buffer->colour = c;
+			m_Buffer->colour = colour;
 			m_Buffer++;
 
 			m_Buffer->vertex = *m_TransformationBack * maths::Vector3(position.x, position.y + size.y, position.z);
 			m_Buffer->textureCoord = uv[1];
 			m_Buffer->textureID = textureSlot;
-			m_Buffer->colour = c;
+			m_Buffer->colour = colour;
 			m_Buffer++;
 
 			m_Buffer->vertex = *m_TransformationBack * maths::Vector3(position.x + size.x, position.y + size.y, position.z);
 			m_Buffer->textureCoord = uv[2];
 			m_Buffer->textureID = textureSlot;
-			m_Buffer->colour = c;
+			m_Buffer->colour = colour;
 			m_Buffer++;
 
 			m_Buffer->vertex = *m_TransformationBack * maths::Vector3(position.x + size.x, position.y, position.z);
 			m_Buffer->textureCoord = uv[3];
 			m_Buffer->textureID = textureSlot;
-			m_Buffer->colour = c;
+			m_Buffer->colour = colour;
 			m_Buffer++;
 
 			m_IndexCount += 6;

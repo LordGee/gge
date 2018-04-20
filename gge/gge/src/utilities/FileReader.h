@@ -6,20 +6,17 @@
 
 namespace gge
 {
-	class FileRead {
-	public:
-		static std::string ReadFile(const char* filepath) {
+	static std::string ReadFile(const char* filepath) {
 
-			std::ifstream file(filepath);
-			std::string line;
-			std::stringstream stream;
+		std::ifstream file(filepath);
+		std::string line;
+		std::stringstream stream;
 
-			while (std::getline(file, line)) {
-				stream << line << "\n";
-			}
-
-			return stream.str();
-
+		while (std::getline(file, line)) {
+			stream << line << "\n";
 		}
-	};
+
+		return stream.str();
+
+	}
 }

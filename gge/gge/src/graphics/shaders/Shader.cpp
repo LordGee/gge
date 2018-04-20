@@ -62,8 +62,8 @@ namespace gge
 			GLuint vertex = glCreateShader(GL_VERTEX_SHADER);
 			GLuint fragment = glCreateShader(GL_FRAGMENT_SHADER);
 
-			std::string vertSourceString = FileRead::ReadFile(m_VertexPath);
-			std::string fragSourceString = FileRead::ReadFile(m_FragmentPath);
+			std::string vertSourceString = ReadFile(m_VertexPath);
+			std::string fragSourceString = ReadFile(m_FragmentPath);
 
 			const char* vertexSource = vertSourceString.c_str();
 			const char* fragmentSource = fragSourceString.c_str();

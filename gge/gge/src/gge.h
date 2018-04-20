@@ -2,10 +2,11 @@
 
 #include "graphics/windows/Window.h"
 #include "maths/Maths.h"
+#include "utilities/Timer.h"
 #include "graphics/shaders/Shader.h"
 
 #include "graphics/layers/TileLayer.h"
-#include "graphics/renderers/Sprite.h"
+#include "graphics/renderables/Sprite.h"
 #include "graphics/layers/Group.h"
 
 #define GGE_SHADER_BASIC_VERT "src/shaders/basic.vert"

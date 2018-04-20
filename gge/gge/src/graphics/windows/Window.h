@@ -17,8 +17,14 @@ namespace gge
 			const char*		m_Title;
 			int				m_Width, m_Height;
 			bool			m_Closed;
-			bool			m_Keys[MAX_KEYS];
+
 			bool			m_MouseButtons[MAX_BUTTONS];
+			bool			m_MouseState[MAX_BUTTONS];
+			bool			m_MouseHeld[MAX_BUTTONS];
+
+			bool			m_Keys[MAX_KEYS];
+			bool			m_KeyState[MAX_KEYS];
+			bool			m_KeyHeld[MAX_KEYS];
 			double			m_X, m_Y;
 
 		public:
@@ -31,11 +37,17 @@ namespace gge
 
 		public:
 			bool IsKeyPressed(unsigned int keycode);
+			bool IsKeyHeld(unsigned int keycode);
 			bool IsMouseButtonPressed(unsigned int button);
+			bool IsMouseButtonDown(unsigned int button);
 			void GetMousePos(double& xpos, double& ypos);
+
+			inline int GetWidth() { return m_Width; }
+			inline int GetHeight() { return m_Height; }
 
 		private:
 			bool Init();
+			friend static void CallbackWindowResize(GLFWwindow *window, int width, int height);
 			friend static void CallbackKeyPress(GLFWwindow* window, int key, int scancode, int action, int mods);
 			friend static void CallbackMouseButton(GLFWwindow* window, int button, int action, int mods);
 			friend static void CallbackMouseCursorPosition(GLFWwindow* window, double xpos, double ypos);
