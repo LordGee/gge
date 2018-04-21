@@ -110,6 +110,84 @@ namespace gge
 			m_IndexCount += 6;
 		}
 
+		void BatchRenderer2D::SubmitText(const std::string& text, const maths::Vector3& position, const Font& font, unsigned int colour) {
+			using namespace  ftgl;
+
+			float ts = 0.0f;
+			bool found = false;
+			for (int i = 0; i < m_TextureSlots.size(); i++) {
+				if (m_TextureSlots[i] == font.GetFontID()) {
+					ts = (float)(i + 1);
+					found = true;
+					break;
+				}
+			}
+			if (!found) {
+				if (m_TextureSlots.size() >= 32) {
+					End();
+					Flush();
+					Begin();
+				}
+				m_TextureSlots.push_back(font.GetFontID());
+				ts = (float)m_TextureSlots.size();
+			}
+
+			float scaleX = 1920.0f / 32.0f;
+			float scaleY = 1080.0f / 18.0f;
+
+			float x = position.x;
+
+			texture_font_t* ftFont = font.GetFont();
+
+			for (int i = 0; i < text.length(); i++) {
+
+				char character = text[i];
+				texture_glyph_t* glyph = texture_font_get_glyph(ftFont, character);
+				if (glyph != NULL) {
+					if (i > 0) {
+						float kerning = texture_glyph_get_kerning(glyph, text[i - 1]);
+						x += kerning / scaleX;
+					}
+					float x0 = x + glyph->offset_x / scaleX;
+					float y0 = position.y + glyph->offset_y / scaleY;
+					float x1 = x0 + glyph->width / scaleX;
+					float y1 = y0 - glyph->height / scaleY;
+
+					float u0 = glyph->s0;
+					float v0 = glyph->t0;
+					float u1 = glyph->s1;
+					float v1 = glyph->t1;
+
+					m_Buffer->vertex = *m_TransformationBack * maths::Vector3(x0, y0, 0);
+					m_Buffer->textureCoord = maths::Vector2(u0, v0);
+					m_Buffer->textureID = ts;
+					m_Buffer->colour = colour;
+					m_Buffer++;
+
+					m_Buffer->vertex = *m_TransformationBack * maths::Vector3(x0, y1, 0);
+					m_Buffer->textureCoord = maths::Vector2(u0, v1);
+					m_Buffer->textureID = ts;
+					m_Buffer->colour = colour;
+					m_Buffer++;
+
+					m_Buffer->vertex = *m_TransformationBack * maths::Vector3(x1, y1, 0);
+					m_Buffer->textureCoord = maths::Vector2(u1, v1);
+					m_Buffer->textureID = ts;
+					m_Buffer->colour = colour;
+					m_Buffer++;
+
+					m_Buffer->vertex = *m_TransformationBack * maths::Vector3(x1, y0, 0);
+					m_Buffer->textureCoord = maths::Vector2(u1, v0);
+					m_Buffer->textureID = ts;
+					m_Buffer->colour = colour;
+					m_Buffer++;
+
+					m_IndexCount += 6;
+					x += glyph->advance_x / scaleX;
+				}
+			}
+		}
+
 		void BatchRenderer2D::End() {
 			glUnmapBuffer(GL_ARRAY_BUFFER);
 			glBindBuffer(GL_ARRAY_BUFFER, 0);

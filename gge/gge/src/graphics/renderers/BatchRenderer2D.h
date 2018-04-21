@@ -35,6 +35,7 @@ namespace gge
 
 			void Begin() override;
 			void Submit(const Renderable2D* renderable) override;
+			void SubmitText(const std::string& text, const maths::Vector3& position, const Font& font, unsigned int colour) override;
 			void End() override;
 			void Flush() override;
 

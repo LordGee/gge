@@ -25,7 +25,7 @@ namespace gge
 			Texture*						m_Texture;
 
 		protected:
-			Renderable2D() {
+			Renderable2D() : m_Texture() {
 				SetTextureCoordsDefault();
 			}
 
@@ -40,7 +40,7 @@ namespace gge
 			virtual void Submit(Renderer2D* renderer) const { renderer->Submit(this); }
 
 			void SetColour(unsigned int colour) { m_Colour = colour; }
-			void SetColour(maths::Vector4& colour) {
+			void SetColour(maths::Vector4 colour) {
 				int r = colour.x * 255.0f;
 				int g = colour.y * 255.0f;
 				int b = colour.z * 255.0f;
@@ -52,7 +52,7 @@ namespace gge
 			inline const maths::Vector2& GetSize() const { return m_Size; }
 			inline const unsigned int GetColour() const { return m_Colour; }
 			inline const std::vector<maths::Vector2>& GetUV() const { return m_TextureCoord; }
-			inline const GLuint GetTextureID() const { return m_Texture == nullptr ? 0 : m_Texture->GetTextureID(); }
+			inline const GLuint GetTextureID() const { return m_Texture ? m_Texture->GetTextureID() : 0; }
 
 
 		private:

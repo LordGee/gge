@@ -8,6 +8,8 @@
 #include "graphics/layers/TileLayer.h"
 #include "graphics/renderables/Sprite.h"
 #include "graphics/layers/Group.h"
+#include "graphics/fonts/Text.h"
+#include "graphics/fonts/FontManager.h"
 
 #define GGE_SHADER_BASIC_VERT "src/shaders/basic.vert"
 #define GGE_SHADER_BASIC_FRAG "src/shaders/basic.frag"

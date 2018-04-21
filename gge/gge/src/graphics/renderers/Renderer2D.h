@@ -2,6 +2,7 @@
 
 #include "../../maths/Maths.h"
 #include <vector>
+#include "../fonts/Font.h"
 
 namespace gge
 {
@@ -39,6 +40,7 @@ namespace gge
 
 			virtual void Begin() {}
 			virtual void Submit(const Renderable2D* renderable) = 0;
+			virtual void SubmitText(const std::string& text, const maths::Vector3& position, const Font& font, unsigned int colour) {}
 			virtual void End() {}
 			virtual void Flush() = 0;
 		};
