@@ -3,6 +3,7 @@
 #include <string>
 #include "gorilla/ga.h"
 #include "../utilities/GetExtension.h"
+#include "gorilla/gau.h"
 
 namespace gge
 {
@@ -14,6 +15,7 @@ namespace gge
 			std::string				m_AudioFile;
 			ga_Sound*				m_Sound;
 			ga_Handle*				m_Handle;
+			gau_SampleSourceLoop*	m_SourceLoop;
 
 			gc_float32				m_Volume;
 			gc_float32				m_Pan;
@@ -56,6 +58,8 @@ namespace gge
 
 			inline const std::string& GetAudioName() const { return m_AudioName; }
 			inline const std::string& GetAudioFileName() const { return m_AudioFile; }
+
+			void MaintainValuesOnLoop(Audio* oldAudio);
 
 		};
 

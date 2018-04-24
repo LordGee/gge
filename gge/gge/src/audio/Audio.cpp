@@ -24,6 +24,7 @@ namespace gge
 		}
 
 		Audio::~Audio() {
+			ga_handle_destroy(m_Handle);
 			ga_sound_release(m_Sound);
 		}
 
@@ -34,7 +35,7 @@ namespace gge
 				m_Handle = gau_create_handle_sound(AudioManager::m_AudioMixer, m_Sound, &destroyOnFinish, &quit, NULL);
 			}
 			else {
-				m_Handle = gau_create_handle_sound(AudioManager::m_AudioMixer, m_Sound, &loopOnFinish, &quit, NULL);
+				m_Handle = gau_create_handle_sound(AudioManager::m_AudioMixer, m_Sound, 0, 0, &m_SourceLoop);
 			}
 			m_Handle->audio = this;
 			ga_handle_play(m_Handle);
@@ -162,13 +163,5 @@ namespace gge
 			Audio* audio = (Audio*)in_handle->audio;
 			audio->Stop();
 		}
-
-		void loopOnFinish(ga_Handle* in_handle, void* in_context) {
-			Audio* audio = (Audio*)in_handle->audio;
-			audio->SetIsPlaying(false);
-			audio->Play();
-			ga_handle_destroy(in_handle);
-		}
-
 	}
 }
