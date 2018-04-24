@@ -123,7 +123,7 @@ namespace gge
 				}
 			}
 			if (!found) {
-				if (m_TextureSlots.size() >= 32) {
+				if (m_TextureSlots.size() >= RENDERER_MAX_TEXTURES) {
 					End();
 					Flush();
 					Begin();
@@ -132,9 +132,8 @@ namespace gge
 				ts = (float)m_TextureSlots.size();
 			}
 
-			float scaleX = 1920.0f / 32.0f;
-			float scaleY = 1080.0f / 18.0f;
-
+			const maths::Vector2& scale = font.GetScale();
+			
 			float x = position.x;
 
 			texture_font_t* ftFont = font.GetFont();
@@ -146,12 +145,12 @@ namespace gge
 				if (glyph != NULL) {
 					if (i > 0) {
 						float kerning = texture_glyph_get_kerning(glyph, text[i - 1]);
-						x += kerning / scaleX;
+						x += kerning / scale.x;
 					}
-					float x0 = x + glyph->offset_x / scaleX;
-					float y0 = position.y + glyph->offset_y / scaleY;
-					float x1 = x0 + glyph->width / scaleX;
-					float y1 = y0 - glyph->height / scaleY;
+					float x0 = x + glyph->offset_x / scale.x;
+					float y0 = position.y + glyph->offset_y / scale.y;
+					float x1 = x0 + glyph->width / scale.x;
+					float y1 = y0 - glyph->height / scale.y;
 
 					float u0 = glyph->s0;
 					float v0 = glyph->t0;
@@ -183,7 +182,7 @@ namespace gge
 					m_Buffer++;
 
 					m_IndexCount += 6;
-					x += glyph->advance_x / scaleX;
+					x += glyph->advance_x / scale.x;
 				}
 			}
 		}
@@ -209,6 +208,8 @@ namespace gge
 			glBindVertexArray(0);
 
 			m_IndexCount = 0;
+
+			m_TextureSlots.clear();
 		}
 	}
 }

@@ -113,6 +113,8 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)gge\res\GLFW\inc;$(SolutionDir)gge\res\GLEW\inc;$(SolutionDir)gge\res\FreeImage\inc;$(SolutionDir)gge\ext\FreeType\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_MBCS;WIN32;NDEBUG;_LIB;FT2_BUILD_LIBRARY;GLEW_STATIC;_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -179,6 +181,7 @@
     <ClCompile Include="ext\FreeType\src\type1\type1.c" />
     <ClCompile Include="ext\FreeType\src\type42\type42.c" />
     <ClCompile Include="ext\FreeType\src\winfonts\winfnt.c" />
+    <ClCompile Include="Game.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="src\audio\Audio.cpp" />
     <ClCompile Include="src\audio\AudioManager.cpp" />

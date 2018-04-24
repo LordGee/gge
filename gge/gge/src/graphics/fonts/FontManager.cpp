@@ -15,6 +15,10 @@ namespace gge
 			m_Fonts.push_back(font);
 		}
 
+		Font* FontManager::GetFont() {
+			return m_Fonts[0];
+		}
+
 		Font* FontManager::GetFont(const std::string& name) {
 			for (int i = 0; i < m_Fonts.size(); i++) {
 				if (m_Fonts[i]->GetFontName() == name) {

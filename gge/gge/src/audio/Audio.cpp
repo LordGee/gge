@@ -46,11 +46,13 @@ namespace gge
 		}
 
 		void Audio::Pause() {
+			if (!m_IsPlaying) { return; }
 			m_PausedPosition = ga_handle_tell(m_Handle, GA_TELL_PARAM_CURRENT);
 			Stop();
 		}
 
 		void Audio::Resume() {
+			if (m_IsPlaying) { return; }
 			Play();
 			ga_handle_seek(m_Handle, m_PausedPosition);
 		}

@@ -13,10 +13,9 @@ namespace gge
 			std::vector<Renderable2D*>	m_Renderables;
 			Shader*						m_Shader;
 			maths::Matrix				m_ProjectionMatrix;
-			
-			Layer(Renderer2D* renderer, Shader* shader, maths::Matrix projectionMatrix);
 
 		public:
+			Layer(Renderer2D* renderer, Shader* shader, maths::Matrix projectionMatrix);
 			virtual ~Layer();
 			virtual void Add(Renderable2D* renderable);
 			virtual void Render();

@@ -47,10 +47,10 @@ namespace gge
 
 		private:
 			bool Init();
-			friend static void CallbackWindowResize(GLFWwindow *window, int width, int height);
-			friend static void CallbackKeyPress(GLFWwindow* window, int key, int scancode, int action, int mods);
-			friend static void CallbackMouseButton(GLFWwindow* window, int button, int action, int mods);
-			friend static void CallbackMouseCursorPosition(GLFWwindow* window, double xpos, double ypos);
+			friend void CallbackWindowResize(GLFWwindow *window, int width, int height);
+			friend void CallbackKeyPress(GLFWwindow* window, int key, int scancode, int action, int mods);
+			friend void CallbackMouseButton(GLFWwindow* window, int button, int action, int mods);
+			friend void CallbackMouseCursorPosition(GLFWwindow* window, double xpos, double ypos);
 		};
 	}
 }

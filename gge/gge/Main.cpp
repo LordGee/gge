@@ -1,5 +1,6 @@
-#include "src/gge.h"
+#if 0
 
+#include "src/gge.h"
 int main() {
 
 	const int width = 1920, height = 1080;
@@ -10,16 +11,6 @@ int main() {
 	Shader& litShader = *s2;
 	TileLayer background(&pointShader);
 	TileLayer foreground(&litShader);
-
-	GLint texIDs[] = {
-		0,1,2,3,4,5,6,7,8,9
-	};
-
-	pointShader.Enable();
-	pointShader.SetUniform1iv(GGE_SHADER_TEXTURES, 10, texIDs);
-
-	litShader.Enable();
-	litShader.SetUniform1iv(GGE_SHADER_TEXTURES, 10, texIDs);
 
 	Texture* textures[] = {
 		new Texture("img/test.png"),
@@ -79,8 +70,6 @@ int main() {
 			timeCount = 0.0f;
 		}
 
-		
-
 		if (window.IsKeyHeld(GLFW_KEY_3)) {
 			defaultSound->IncreaseVolume();
 		}
@@ -135,3 +124,4 @@ int main() {
 
 
 }
+#endif

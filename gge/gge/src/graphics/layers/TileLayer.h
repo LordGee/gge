@@ -3,15 +3,11 @@
 #include "Layer.h"
 #include "../renderers/BatchRenderer2D.h"
 
-namespace gge
-{
-	namespace graphics
-	{
-		class TileLayer : public Layer {
+// an example of an object implementation.
 
-		public:
-			TileLayer(Shader* shader);
-			~TileLayer();
-		};
-	}
-}
+class TileLayer : public gge::graphics::Layer {
+
+public:
+	TileLayer(gge::graphics::Shader* shader);
+	~TileLayer();
+};

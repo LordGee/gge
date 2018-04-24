@@ -14,6 +14,7 @@ namespace gge
 		public:
 			static void FontManagerInit();
 			static void AddFont(Font* font);
+			static Font* GetFont();
 			static Font* GetFont(const std::string& name);
 			static Font* GetFont(const std::string& name, unsigned int size);
 			static void TeminateAllFonts();
