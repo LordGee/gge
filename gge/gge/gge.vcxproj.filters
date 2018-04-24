@@ -168,6 +168,39 @@
     <ClInclude Include="src\graphics\layers\TileLayer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="res\GorillaAudio\inc\gorilla\common\gc_common.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="res\GorillaAudio\inc\gorilla\common\gc_thread.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="res\GorillaAudio\inc\gorilla\common\gc_types.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="res\GorillaAudio\inc\gorilla\devices\ga_openal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="res\GorillaAudio\inc\gorilla\devices\ga_xaudio2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="res\GorillaAudio\inc\gorilla\ga.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="res\GorillaAudio\inc\gorilla\ga_internal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="res\GorillaAudio\inc\gorilla\gau.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\audio\Audio.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\audio\AudioManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\utilities\GetExtension.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\GLFW\lib\glfw3.dll" />
@@ -176,6 +209,11 @@
     <None Include="res\FreeImage\bin\FreeImage.dll" />
     <None Include="FreeImage.dll" />
     <None Include="src\shaders\light.frag" />
+    <None Include="audio\BeBop.ogg" />
+    <None Include="res\GorillaAudio\bin\win32\Release\gorilla.idb" />
+    <None Include="res\GorillaAudio\bin\win32\Release\gorilla.pdb" />
+    <None Include="res\GorillaAudio\bin\win32\Debug\gorillaD.idb" />
+    <None Include="res\GorillaAudio\bin\win32\Debug\gorillad.pdb" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="res\GLFW\lib\glfw3.lib" />
@@ -183,6 +221,8 @@
     <Library Include="res\GLEW\lib\glew32.lib" />
     <Library Include="res\GLEW\lib\glew32s.lib" />
     <Library Include="res\FreeImage\lib\FreeImage.lib" />
+    <Library Include="res\GorillaAudio\bin\win32\Release\gorilla.lib" />
+    <Library Include="res\GorillaAudio\bin\win32\Debug\gorillaD.lib" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -371,6 +411,12 @@
     <ClCompile Include="src\graphics\layers\TileLayer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\audio\Audio.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\audio\AudioManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="img\test.png">
@@ -389,5 +435,25 @@
   <ItemGroup>
     <Font Include="font\arial.ttf" />
     <Font Include="font\Muli-Bold.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="audio\BeBop.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="audio\snapper4298\credits1.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="audio\snapper4298\credits2.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="audio\snapper4298\credits3.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="audio\snapper4298\credits4.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="audio\snapper4298\credits5.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
   </ItemGroup>
 </Project>

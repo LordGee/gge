@@ -2,10 +2,6 @@
 
 int main() {
 
-	using namespace gge;
-	using namespace graphics;
-	using namespace maths;
-
 	const int width = 1920, height = 1080;
 	Window window("GG Engine", width, height);
 	Shader* s1 = new Shader(GGE_SHADER_BASIC_VERT, GGE_SHADER_BASIC_FRAG_LIGHT);
@@ -64,6 +60,11 @@ int main() {
 	float colourTick = 0.0f;
 	int frameCount = 0;
 
+	AudioManager::GetAudioClip(GGE_DEFAULT_STRING)->SetAudioLoop(true);
+	AudioManager::GetAudioClip(GGE_DEFAULT_STRING)->Play();
+
+	Audio* defaultSound = AudioManager::GetAudioClip(GGE_DEFAULT_STRING);
+
 	while (!window.IsClosed())
 	{
 		window.WindowClear();
@@ -78,6 +79,29 @@ int main() {
 			timeCount = 0.0f;
 		}
 
+		
+
+		if (window.IsKeyHeld(GLFW_KEY_3)) {
+			defaultSound->IncreaseVolume();
+		}
+		if (window.IsKeyHeld(GLFW_KEY_2)) {
+			defaultSound->DecreaseVolume();
+		}
+		if (window.IsKeyHeld(GLFW_KEY_0)) {
+			defaultSound->IncreasePitch();
+		}
+		if (window.IsKeyHeld(GLFW_KEY_9)) {
+			defaultSound->DecreasePitch();
+		}
+		if (window.IsKeyHeld(GLFW_KEY_5)) {
+			defaultSound->IncrementLeftPan();
+		}
+		if (window.IsKeyHeld(GLFW_KEY_6)) {
+			defaultSound->CenterPan();
+		}
+		if (window.IsKeyHeld(GLFW_KEY_7)) {
+			defaultSound->IncrementRightPan();
+		}
 
 		colourTick += 0.001f;
 		const std::vector<Renderable2D*>& rs = background.GetRenderables();

@@ -1,5 +1,6 @@
 #include "Window.h"
 #include "../fonts/FontManager.h"
+#include "../../audio/AudioManager.h"
 
 namespace gge
 {
@@ -26,11 +27,13 @@ namespace gge
 				m_MouseHeld[i] = false;
 			}
 			FontManager::FontManagerInit();
+			audio::AudioManager::AudioInit();
 		}
 
 		Window::~Window() {
 			glfwTerminate();
 			FontManager::TeminateAllFonts();
+			audio::AudioManager::TerminateAudioClips();
 		}
 
 		// Initialise a new Window
@@ -86,6 +89,8 @@ namespace gge
 				m_MouseHeld[i] = m_MouseButtons[i] && !m_MouseState[i];
 			}
 			memcpy(m_MouseState, m_MouseButtons, MAX_BUTTONS * sizeof(bool));
+
+			audio::AudioManager::UpdateAudio();
 
 			GLenum error = glGetError();
 			if (error != GL_NO_ERROR) {
