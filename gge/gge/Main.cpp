@@ -1,16 +1,18 @@
 #if 0
 
-#include "src/gge.h"
+#include "src/GGEngine.h"
+#include "src/graphics/layers/TileLayer.h"
+
 int main() {
 
 	const int width = 1920, height = 1080;
 	Window window("GG Engine", width, height);
-	Shader* s1 = new Shader(GGE_SHADER_BASIC_VERT, GGE_SHADER_BASIC_FRAG_LIGHT);
-	Shader* s2 = new Shader(GGE_SHADER_BASIC_VERT, GGE_SHADER_BASIC_FRAG);
+	Shader* s1 = new Shader(GGE_SHADER_BASIC_VERT, GGE_SHADER_BASIC_FRAG);
+	//Shader* s2 = new Shader(GGE_SHADER_BASIC_VERT, GGE_SHADER_BASIC_FRAG);
 	Shader& pointShader = *s1;
-	Shader& litShader = *s2;
+	//Shader& litShader = *s2;
 	TileLayer background(&pointShader);
-	TileLayer foreground(&litShader);
+	//TileLayer foreground(&litShader);
 
 	Texture* textures[] = {
 		new Texture("img/test.png"),
@@ -27,7 +29,7 @@ int main() {
 			int r = rand() % 256;
 			int colour = 0xffff00 << 8 | r;
 
-			if (rand() % 2 == 0) {
+			if (false){ // rand() % 2 == 0) {
 				background.Add(new Sprite(x, y, 0.4f, 0.4f, colour));
 			} else {
 				background.Add(new Sprite(x, y, 0.4f, 0.4f,
@@ -40,7 +42,7 @@ int main() {
 	FontManager::AddFont(new Font("MULI", "font/Muli-Bold.ttf", 48));
 
 	Text* fps = new Text("FPS Counter", -15, 8, FontManager::GetFont("MULI"), 0xffff424d);
-	foreground.Add(fps);
+	// foreground.Add(fps);
 
 	std::cout << "Sprites drawn : " << counter << std::endl;
 
@@ -109,8 +111,8 @@ int main() {
 			MouseWorldPosition(x, y, static_cast<float>(window.GetWidth()), static_cast<float>(window.GetHeight())));
 
 		background.Render();
-		litShader.Enable();
-		foreground.Render();
+		//litShader.Enable();
+		//foreground.Render();
 		window.WindowUpdate();
 		
 	}

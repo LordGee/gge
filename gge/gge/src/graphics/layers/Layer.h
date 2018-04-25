@@ -16,6 +16,7 @@ namespace gge
 
 		public:
 			Layer(Renderer2D* renderer, Shader* shader, maths::Matrix projectionMatrix);
+
 			virtual ~Layer();
 			virtual void Add(Renderable2D* renderable);
 			virtual void Render();

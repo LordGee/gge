@@ -1,30 +1,45 @@
 #pragma once
 
 #include "graphics/windows/Window.h"
-#include "maths/Maths.h"
-#include "utilities/Timer.h"
+#include "graphics/renderers/Renderer2D.h"
+#include "graphics/renderers/BatchRenderer2D.h"
 #include "graphics/shaders/Shader.h"
 
-#include "graphics/layers/TileLayer.h"
+#include "graphics/layers/Layer.h"
 #include "graphics/renderables/Sprite.h"
 #include "graphics/layers/Group.h"
+
 #include "graphics/fonts/Text.h"
 #include "graphics/fonts/FontManager.h"
-// #include "audio/Audio.h"
-// #include "audio/AudioManager.h"
 
+#include "maths/Maths.h"
+#include "utilities/Timer.h"
+
+#include "audio/AudioManager.h"
+
+// Shaders
 #define GGE_SHADER_BASIC_VERT			"src/shaders/basic.vert"
 #define GGE_SHADER_BASIC_FRAG			"src/shaders/basic.frag"
 #define GGE_SHADER_BASIC_FRAG_LIGHT		"src/shaders/light.frag"
 #define GGE_SHADER_LIGHT_POS			"light_pos"
-#define GGE_SHADER_TEXTURES				"textures"
+
+// Audio
 #define GGE_AUDIO_OVERRIDE				1
+
+// Strings
 #define GGE_DEFAULT_STRING				"Default"
 
-// using namespace gge;
-// using namespace graphics;
-// using namespace maths;
-// using namespace audio;
+// Colours
+#define GGE_COL_WHITE					0xffffffff
+#define GGE_COL_BLACK					0xff000000
+#define GGE_COL_RED						0xff0000ff
+#define GGE_COL_GREEN					0xff00ff00
+#define GGE_COL_BLUE					0xffff0000
+
+using namespace gge;
+using namespace graphics;
+using namespace maths;
+using namespace audio;
 
 static gge::maths::Vector2 MouseWorldPosition(double x, double y, float w, float h) {
 	return gge::maths::Vector2(static_cast<float>(x * 32.0f / w - 16.0f), static_cast<float>(9.0f - y * 18.0f / h));
@@ -32,24 +47,25 @@ static gge::maths::Vector2 MouseWorldPosition(double x, double y, float w, float
 
 namespace gge
 {
-	class GGE {
+	class GGEngine {
 	private:
-		graphics::Window *	m_Window;
+		Window*				m_Window;
 		Timer*				m_Timer;
 		float				m_Time;
 		unsigned int		m_FramesPerSecond, m_UpdatesPerSecond;
-		float				m_Delta;
 
 	protected:
-		GGE() {
+		GGEngine() {
 			m_FramesPerSecond = 0;
 			m_UpdatesPerSecond = 0;
 		}
 
-		virtual ~GGE() { }
+		virtual ~GGEngine() {
+			delete m_Timer;
+		}
 
-		graphics::Window* CreateWindow(const char* name, int width, int height) {
-			m_Window = new graphics::Window(name, width, height);
+		Window* CreateWindow(const char* name, int width, int height) {
+			m_Window = new Window(name, width, height);
 			return m_Window;
 		}
 
@@ -82,16 +98,14 @@ namespace gge
 				m_Window->WindowClear();
 
 				if (m_Timer->Elapsed() - updateTimer > updateTick) {
-					updateTimer = m_Timer->Elapsed();
 					Update();
+					updateTimer = m_Timer->Elapsed();
 					updates++;
 				}
 
 				Render();
-
-				m_Window->WindowUpdate();
-
 				frames++;
+				m_Window->WindowUpdate();
 
 				if (m_Timer->Elapsed() - m_Time > 1.0f) {
 					m_Time = m_Timer->Elapsed();

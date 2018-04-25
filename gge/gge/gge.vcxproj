@@ -235,7 +235,7 @@
     <ClInclude Include="res\GorillaAudio\inc\gorilla\ga_internal.h" />
     <ClInclude Include="src\audio\Audio.h" />
     <ClInclude Include="src\audio\AudioManager.h" />
-    <ClInclude Include="src\gge.h" />
+    <ClInclude Include="src\GGEngine.h" />
     <ClInclude Include="src\graphics\buffers\Buffer.h" />
     <ClInclude Include="src\graphics\buffers\IndexBuffer.h" />
     <ClInclude Include="src\graphics\buffers\VertexArray.h" />

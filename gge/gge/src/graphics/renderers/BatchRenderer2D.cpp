@@ -73,7 +73,7 @@ namespace gge
 					}
 				}
 				if (!found) {
-					if (m_TextureSlots.size() >= 32) {
+					if (m_TextureSlots.size() >= RENDERER_MAX_TEXTURES) {
 						End();
 						Flush();
 						Begin();
@@ -208,7 +208,6 @@ namespace gge
 			glBindVertexArray(0);
 
 			m_IndexCount = 0;
-
 			m_TextureSlots.clear();
 		}
 	}
