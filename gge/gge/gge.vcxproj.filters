@@ -69,25 +69,13 @@
     <ClInclude Include="src\utilities\FileReader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\graphics\buffers\Buffer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\graphics\buffers\IndexBuffer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\graphics\buffers\VertexArray.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\graphics\renderers\Renderer2D.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\graphics\layers\Layer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\graphics\renderers\BatchRenderer2D.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\graphics\layers\Group.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="res\FreeImage\inc\FreeImage.h">
@@ -162,9 +150,6 @@
     <ClInclude Include="src\graphics\fonts\Text.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\graphics\layers\TileLayer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="res\GorillaAudio\inc\gorilla\common\gc_common.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -198,7 +183,16 @@
     <ClInclude Include="src\utilities\GetExtension.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\GGEngine.h">
+    <ClInclude Include="src\include\GGEngine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Example.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\layers\Container.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -210,10 +204,10 @@
     <None Include="FreeImage.dll" />
     <None Include="src\shaders\light.frag" />
     <None Include="audio\BeBop.ogg" />
-    <None Include="res\GorillaAudio\bin\win32\Release\gorilla.idb" />
-    <None Include="res\GorillaAudio\bin\win32\Release\gorilla.pdb" />
-    <None Include="res\GorillaAudio\bin\win32\Debug\gorillaD.idb" />
-    <None Include="res\GorillaAudio\bin\win32\Debug\gorillad.pdb" />
+    <None Include="res\GorillaAudio\lib\win32\Debug\gorillaD.idb" />
+    <None Include="res\GorillaAudio\lib\win32\Debug\gorillad.pdb" />
+    <None Include="res\GorillaAudio\lib\win32\Rel\gorilla.idb" />
+    <None Include="res\GorillaAudio\lib\win32\Rel\gorilla.pdb" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="res\GLFW\lib\glfw3.lib" />
@@ -221,8 +215,8 @@
     <Library Include="res\GLEW\lib\glew32.lib" />
     <Library Include="res\GLEW\lib\glew32s.lib" />
     <Library Include="res\FreeImage\lib\FreeImage.lib" />
-    <Library Include="res\GorillaAudio\bin\win32\Release\gorilla.lib" />
-    <Library Include="res\GorillaAudio\bin\win32\Debug\gorillaD.lib" />
+    <Library Include="res\GorillaAudio\lib\win32\Debug\gorillaD.lib" />
+    <Library Include="res\GorillaAudio\lib\win32\Rel\gorilla.lib" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -240,22 +234,10 @@
     <ClCompile Include="src\maths\Matrix.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\graphics\buffers\Buffer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\graphics\buffers\IndexBuffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\graphics\buffers\VertexArray.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\graphics\layers\Layer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\graphics\renderers\BatchRenderer2D.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\graphics\layers\Group.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\graphics\textures\Texture.cpp">
@@ -408,9 +390,6 @@
     <ClCompile Include="src\graphics\fonts\Text.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\graphics\layers\TileLayer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\audio\Audio.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -418,6 +397,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Game.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Example.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\layers\Container.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

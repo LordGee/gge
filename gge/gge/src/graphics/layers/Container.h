@@ -7,7 +7,7 @@ namespace gge
 {
 	namespace graphics
 	{
-		class Layer {
+		class Container {
 		protected:
 			Renderer2D *				m_Renderer;
 			std::vector<Renderable2D*>	m_Renderables;
@@ -15,13 +15,19 @@ namespace gge
 			maths::Matrix				m_ProjectionMatrix;
 
 		public:
-			Layer(Renderer2D* renderer, Shader* shader, maths::Matrix projectionMatrix);
+			Container(Shader* shader);
+			Container(Shader* shader, maths::Matrix projectionMatrix);
+			Container(Renderer2D* renderer, Shader* shader, maths::Matrix projectionMatrix);
 
-			virtual ~Layer();
-			virtual void Add(Renderable2D* renderable);
-			virtual void Render();
+			virtual ~Container();
+			virtual void AddToContainer(Renderable2D* renderable);
+			virtual void RenderThisContainer();
 
 			inline const std::vector<Renderable2D*>& GetRenderables() const { return m_Renderables; }
+
+		private:
+			void SetupShader();
+
 		};
 	}
 }

@@ -4,7 +4,7 @@
 #include <glfw3.h>
 #include <iostream>
 
-#define MAX_KEYS 1024
+#define MAX_KEYS 512
 #define MAX_BUTTONS 52
 
 namespace gge
@@ -13,10 +13,12 @@ namespace gge
 	{
 		class Window {
 		private:
+			GLFWmonitor *	m_Monitor;
 			GLFWwindow *	m_Window;
 			const char*		m_Title;
 			int				m_Width, m_Height;
 			bool			m_Closed;
+			bool			m_FullScreen;
 
 			bool			m_MouseButtons[MAX_BUTTONS];
 			bool			m_MouseState[MAX_BUTTONS];
@@ -28,7 +30,7 @@ namespace gge
 			double			m_X, m_Y;
 
 		public:
-			Window(const char* name, int width, int height);
+			Window(const char* name, int width, int height, bool fullScreen);
 			~Window();
 			bool IsClosed();
 			void WindowClear();
@@ -36,21 +38,21 @@ namespace gge
 			void WindowDestroy();
 
 		public:
-			bool IsKeyPressed(unsigned int keycode);
-			bool IsKeyHeld(unsigned int keycode);
-			bool IsMouseButtonPressed(unsigned int button);
+			bool IsKeyHeldDown(unsigned int keycode);
+			bool IsKeyDown(unsigned int keycode);
+			bool IsMouseButtonHeldDown(unsigned int button);
 			bool IsMouseButtonDown(unsigned int button);
 			void GetMousePos(double& xpos, double& ypos);
 
-			inline int GetWidth() { return m_Width; }
-			inline int GetHeight() { return m_Height; }
+			inline int GetWindowWidth() { return m_Width; }
+			inline int GetWindowHeight() { return m_Height; }
 
 		private:
 			bool Init();
-			friend void CallbackWindowResize(GLFWwindow *window, int width, int height);
-			friend void CallbackKeyPress(GLFWwindow* window, int key, int scancode, int action, int mods);
-			friend void CallbackMouseButton(GLFWwindow* window, int button, int action, int mods);
-			friend void CallbackMouseCursorPosition(GLFWwindow* window, double xpos, double ypos);
+			friend void Callback_WindowResize(GLFWwindow *window, int width, int height);
+			friend void Callback_KeyPress(GLFWwindow* window, int key, int scancode, int action, int mods);
+			friend void Callback_MouseButton(GLFWwindow* window, int button, int action, int mods);
+			friend void Callback_MouseCursorPosition(GLFWwindow* window, double xpos, double ypos);
 		};
 	}
 }

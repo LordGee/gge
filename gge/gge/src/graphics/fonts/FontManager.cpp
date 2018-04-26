@@ -8,7 +8,6 @@ namespace gge
 
 		void FontManager::FontManagerInit() {
 			AddFont(new Font("Default", "font/arial.ttf", 32));
-			printf("Font added %s\n", m_Fonts[0]->GetFontName().c_str());
 		}
 
 		void FontManager::AddFont(Font* font) {

@@ -13,7 +13,6 @@ namespace gge
 			m_AudioManager = gau_manager_create();
 			m_AudioMixer = gau_manager_mixer(m_AudioManager);
 			AddAudioClip(new Audio("Default", "audio/snapper4298/credits2.wav"));
-			// AddAudioClip(new Audio("Default", "audio/BeBop.wav"));
 		}
 
 		void AudioManager::UpdateAudio() {

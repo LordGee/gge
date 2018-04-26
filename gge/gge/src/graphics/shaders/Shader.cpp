@@ -3,9 +3,16 @@
 namespace gge
 { 
 	namespace graphics {
-		Shader::Shader(const char* vertexPath, const char* fragmentPath) :
-			m_VertexPath(vertexPath), m_FragmentPath(fragmentPath) {
-			m_ShaderID = Load();
+		Shader::Shader() {
+			m_VertexPath = "src/shaders/basic.vert";
+			m_FragmentPath = "src/shaders/basic.frag";
+			m_ShaderID = LoadInShader();
+		}
+
+		Shader::Shader(const char* vertexPath, const char* fragmentPath) 
+			: m_VertexPath(vertexPath), m_FragmentPath(fragmentPath)
+		{
+			m_ShaderID = LoadInShader();
 		}
 
 		Shader::~Shader() {
@@ -56,8 +63,7 @@ namespace gge
 			glUseProgram(0);
 		}
 
-		// todo: refactor to read from one file and seperate out the two shaders
-		GLuint Shader::Load() {
+		GLuint Shader::LoadInShader() {
 			GLuint program = glCreateProgram();
 			GLuint vertex = glCreateShader(GL_VERTEX_SHADER);
 			GLuint fragment = glCreateShader(GL_FRAGMENT_SHADER);
@@ -70,31 +76,19 @@ namespace gge
 
 			glShaderSource(vertex, 1, &vertexSource, NULL);
 			glCompileShader(vertex);
-
 			GLint result;
 			glGetShaderiv(vertex, GL_COMPILE_STATUS, &result);
 			if (result == GL_FALSE) {
-				GLint length;
-				glGetShaderiv(vertex, GL_INFO_LOG_LENGTH, &length);
-				std::vector<char> error(length);
-				glGetShaderInfoLog(vertex, length, &length, &error[0]);
-				std::cout << "Failed to compile Vertex Shader : " << &error[0] << std::endl;
-				glDeleteShader(vertex);
+				HandleShaderError(vertex);
 				return 0;
 			}
 
 			glShaderSource(fragment, 1, &fragmentSource, NULL);
 			glCompileShader(fragment);
-
 			result = NULL;
 			glGetShaderiv(fragment, GL_COMPILE_STATUS, &result);
 			if (result == GL_FALSE) {
-				GLint length;
-				glGetShaderiv(fragment, GL_INFO_LOG_LENGTH, &length);
-				std::vector<char> error(length);
-				glGetShaderInfoLog(fragment, length, &length, &error[0]);
-				std::cout << "Failed to compile Fragment Shader : " << &error[0] << std::endl;
-				glDeleteShader(fragment);
+				HandleShaderError(fragment);
 				return 0;
 			}
 
@@ -109,5 +103,15 @@ namespace gge
 
 			return program;
 		}
+
+		void Shader::HandleShaderError(GLuint id) {
+			GLint length;
+			glGetShaderiv(id, GL_INFO_LOG_LENGTH, &length);
+			std::vector<char> error(length);
+			glGetShaderInfoLog(id, length, &length, &error[0]);
+			std::cout << "Failed to compile Fragment Shader : " << &error[0] << std::endl;
+			glDeleteShader(id);
+		}
+
 	}
 }

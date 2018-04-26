@@ -58,9 +58,6 @@ namespace gge
 
 			inline const std::string& GetAudioName() const { return m_AudioName; }
 			inline const std::string& GetAudioFileName() const { return m_AudioFile; }
-
-			void MaintainValuesOnLoop(Audio* oldAudio);
-
 		};
 
 

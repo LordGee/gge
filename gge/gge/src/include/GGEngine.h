@@ -1,21 +1,20 @@
 #pragma once
 
-#include "graphics/windows/Window.h"
-#include "graphics/renderers/Renderer2D.h"
-#include "graphics/renderers/BatchRenderer2D.h"
-#include "graphics/shaders/Shader.h"
+#include "../graphics/windows/Window.h"
+#include "../graphics/renderers/Renderer2D.h"
+#include "../graphics/renderers/BatchRenderer2D.h"
+#include "../graphics/shaders/Shader.h"
 
-#include "graphics/layers/Layer.h"
-#include "graphics/renderables/Sprite.h"
-#include "graphics/layers/Group.h"
+#include "../graphics/layers/Container.h"
+#include "../graphics/renderables/Sprite.h"
 
-#include "graphics/fonts/Text.h"
-#include "graphics/fonts/FontManager.h"
+#include "../graphics/fonts/Text.h"
+#include "../graphics/fonts/FontManager.h"
 
-#include "maths/Maths.h"
-#include "utilities/Timer.h"
+#include "../maths/Maths.h"
+#include "../utilities/Timer.h"
 
-#include "audio/AudioManager.h"
+#include "../audio/AudioManager.h"
 
 // Shaders
 #define GGE_SHADER_BASIC_VERT			"src/shaders/basic.vert"
@@ -41,9 +40,7 @@ using namespace graphics;
 using namespace maths;
 using namespace audio;
 
-static gge::maths::Vector2 MouseWorldPosition(double x, double y, float w, float h) {
-	return gge::maths::Vector2(static_cast<float>(x * 32.0f / w - 16.0f), static_cast<float>(9.0f - y * 18.0f / h));
-}
+
 
 namespace gge
 {
@@ -64,8 +61,8 @@ namespace gge
 			delete m_Timer;
 		}
 
-		Window* CreateWindow(const char* name, int width, int height) {
-			m_Window = new Window(name, width, height);
+		Window* CreateWindow(const char* name, int width, int height, bool fullScreen = false) {
+			m_Window = new Window(name, width, height, fullScreen);
 			return m_Window;
 		}
 
@@ -79,7 +76,8 @@ namespace gge
 		virtual void Start() = 0; // run once at start
 		virtual void Tick() {} // once per second
 		virtual void Update() {} // 60 frames per second
-		virtual void Render() = 0; // as fast a s possible
+		virtual void FastUpdate() {} // as fast as render 
+		virtual void Render() = 0; // as fast as possible
 
 		const unsigned int GetFramesPerSecond() { return m_FramesPerSecond; }
 		const unsigned int GetUpdatesPerSecond() { return m_UpdatesPerSecond; }
@@ -103,6 +101,7 @@ namespace gge
 					updates++;
 				}
 
+				FastUpdate();
 				Render();
 				frames++;
 				m_Window->WindowUpdate();
@@ -115,6 +114,12 @@ namespace gge
 					Tick();
 				}
 			}
+
+			m_Window->WindowDestroy();
 		}
 	};
+
+	static Vector2 MouseWorldPosition(double x, double y, float w, float h) {
+		return Vector2(static_cast<float>(x * 32.0f / w - 16.0f), static_cast<float>(9.0f - y * 18.0f / h));
+	}
 }

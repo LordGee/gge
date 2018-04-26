@@ -2,12 +2,8 @@
 #include <vector>
 #include "Audio.h"
 
-#define GAU_THREAD_POLICY_MULTI	2
-
 #include "gorilla/ga.h"
 #include "gorilla/gau.h"
-
-
 
 namespace gge
 {

@@ -33,13 +33,12 @@ namespace gge
 			gc_int32 quit = 0;
 			if (!m_IsLooping) {
 				m_Handle = gau_create_handle_sound(AudioManager::m_AudioMixer, m_Sound, &destroyOnFinish, &quit, NULL);
-			}
-			else {
+			} else {
 				m_Handle = gau_create_handle_sound(AudioManager::m_AudioMixer, m_Sound, 0, 0, &m_SourceLoop);
 			}
 			m_Handle->audio = this;
-			ga_handle_play(m_Handle);
 			m_IsPlaying = true;
+			ga_handle_play(m_Handle);
 			ga_handle_getParamf(m_Handle, GA_HANDLE_PARAM_GAIN, &m_Volume);
 			ga_handle_getParamf(m_Handle, GA_HANDLE_PARAM_PITCH, &m_Pitch);
 			ga_handle_getParamf(m_Handle, GA_HANDLE_PARAM_PAN, &m_Pan);

@@ -18,6 +18,7 @@ namespace gge
 			const char*		m_FragmentPath;
 
 		public:
+			Shader();
 			Shader(const char* vertexPath, const char* fragmentPath);
 			~Shader();
 
@@ -37,8 +38,10 @@ namespace gge
 			void Disable() const;
 
 		private:
-			GLuint Load();
+			GLuint LoadInShader();
 			GLint GetUniformLocation(const GLchar* name);
+			void HandleShaderError(GLuint id);
+
 		};
 	}
 }

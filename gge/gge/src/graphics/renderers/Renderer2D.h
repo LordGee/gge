@@ -14,6 +14,7 @@ namespace gge
 		protected:
 			std::vector<maths::Matrix>		m_TransformationStack;
 			const maths::Matrix*			m_TransformationBack;
+
 		protected:
 			Renderer2D() {
 				m_TransformationStack.push_back(maths::Matrix::identity());

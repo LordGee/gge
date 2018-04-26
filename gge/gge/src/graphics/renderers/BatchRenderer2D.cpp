@@ -19,23 +19,23 @@ namespace gge
 
 			glBindVertexArray(m_VAO);
 			glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
-			glBufferData(GL_ARRAY_BUFFER, RENDERER_BUFFER_SIZE, NULL, GL_DYNAMIC_DRAW);
+			glBufferData(GL_ARRAY_BUFFER, BUFFER_SIZE, NULL, GL_DYNAMIC_DRAW);
 			
-			glEnableVertexAttribArray(SHADER_VERTEX_INDEX);
-			glEnableVertexAttribArray(SHADER_UV_INDEX);
-			glEnableVertexAttribArray(SHADER_TID_INDEX);
-			glEnableVertexAttribArray(SHADER_COLOUR_INDEX);
+			glEnableVertexAttribArray(ATTR_VERTEX_INDEX);
+			glEnableVertexAttribArray(ATTR_COLOUR_INDEX);
+			glEnableVertexAttribArray(ATTR_UV_INDEX);
+			glEnableVertexAttribArray(ATTR_TEXID_INDEX);
 			
-			glVertexAttribPointer(SHADER_VERTEX_INDEX, 3, GL_FLOAT, GL_FALSE, RENDERER_VERTEX_SIZE, (const GLvoid*)0);
-			glVertexAttribPointer(SHADER_UV_INDEX, 2, GL_FLOAT, GL_FALSE, RENDERER_VERTEX_SIZE, (const GLvoid*)(offsetof(VertexData, VertexData::textureCoord)));
-			glVertexAttribPointer(SHADER_TID_INDEX, 1, GL_FLOAT, GL_FALSE, RENDERER_VERTEX_SIZE, (const GLvoid*)(offsetof(VertexData, VertexData::textureID)));
-			glVertexAttribPointer(SHADER_COLOUR_INDEX, 4, GL_UNSIGNED_BYTE, GL_TRUE, RENDERER_VERTEX_SIZE, (const GLvoid*)(offsetof(VertexData, VertexData::colour)));
+			glVertexAttribPointer(ATTR_VERTEX_INDEX, 3, GL_FLOAT, GL_FALSE, VERTEX_SIZE, (const GLvoid*)0);
+			glVertexAttribPointer(ATTR_COLOUR_INDEX, 4, GL_UNSIGNED_BYTE, GL_TRUE, VERTEX_SIZE, (const GLvoid*)(offsetof(VertexData, VertexData::colour)));
+			glVertexAttribPointer(ATTR_UV_INDEX, 2, GL_FLOAT, GL_FALSE, VERTEX_SIZE, (const GLvoid*)(offsetof(VertexData, VertexData::textureCoord)));
+			glVertexAttribPointer(ATTR_TEXID_INDEX, 1, GL_FLOAT, GL_FALSE, VERTEX_SIZE, (const GLvoid*)(offsetof(VertexData, VertexData::textureID)));
 
 			glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-			GLuint* indicies = new GLuint[RENDERER_INDICES_SIZE];
+			GLuint* indicies = new GLuint[INDICES_SIZE];
 			int offset = 0;
-			for (int i = 0; i < RENDERER_INDICES_SIZE; i += 6) {
+			for (int i = 0; i < INDICES_SIZE; i += 6) {
 				indicies[i] = offset + 0;
 				indicies[i + 1] = offset + 1;
 				indicies[i + 2] = offset + 2;
@@ -45,7 +45,7 @@ namespace gge
 				offset += 4;
 			}
 
-			m_IBO = new IndexBuffer(indicies, RENDERER_INDICES_SIZE);
+			m_IBO = new IndexBuffer(indicies, INDICES_SIZE);
 
 			glBindVertexArray(0);
 		}
@@ -73,7 +73,7 @@ namespace gge
 					}
 				}
 				if (!found) {
-					if (m_TextureSlots.size() >= RENDERER_MAX_TEXTURES) {
+					if (m_TextureSlots.size() >= MAXIMUM_TEXTURES) {
 						End();
 						Flush();
 						Begin();
@@ -123,7 +123,7 @@ namespace gge
 				}
 			}
 			if (!found) {
-				if (m_TextureSlots.size() >= RENDERER_MAX_TEXTURES) {
+				if (m_TextureSlots.size() >= MAXIMUM_TEXTURES) {
 					End();
 					Flush();
 					Begin();
