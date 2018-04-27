@@ -163,6 +163,7 @@ namespace gge
 			win->m_Y = ypos;
 		}
 
+		/* Check if a key is held down and keeps checking until release */
 		bool Window::IsKeyHeldDown(unsigned int keycode) {
 			if (keycode >= MAX_KEYS) {
 				std::cerr << "Invalid Key Request (Out of range)" << std::endl;
@@ -171,6 +172,7 @@ namespace gge
 			return m_Keys[keycode];
 		}
 
+		/* Same as previous but is only actioned once until release */
 		bool Window::IsKeyDown(unsigned int keycode) {
 			if (keycode >= MAX_KEYS) {
 				std::cerr << "Invalid Key Request (Out of range)" << std::endl;
@@ -179,6 +181,7 @@ namespace gge
 			return m_KeyHeld[keycode];
 		}
 
+		/* Check if a mouse button is held down and keeps checking until release */
 		bool Window::IsMouseButtonHeldDown(unsigned int button) {
 			if (button >= MAX_BUTTONS) {
 				std::cerr << "Invalid Button Request (Out of range)" << std::endl;
@@ -187,6 +190,7 @@ namespace gge
 			return m_MouseButtons[button];
 		}
 
+		/* Same as previous but is only actioned once until release */
 		bool Window::IsMouseButtonDown(unsigned int button) {
 			if (button >= MAX_BUTTONS) {
 				std::cerr << "Invalid Button Request (Out of range)" << std::endl;
@@ -195,6 +199,7 @@ namespace gge
 			return m_MouseHeld[button];
 		}
 
+		/* Returns current mouse position via referenced variables */
 		void Window::GetMousePos(double & xpos, double & ypos) {
 			xpos = m_X;
 			ypos = m_Y;

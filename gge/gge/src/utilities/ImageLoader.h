@@ -4,6 +4,9 @@
 
 namespace gge
 {
+	/* Loads the image using FreeType */
+	/* Following code is a modification of the Example texture manager provided */
+	/* Ref: https://github.com/leapmotion/FreeImage/blob/master/Examples/OpenGL/TextureManager/TextureManager.cpp */
 	static BYTE* LoadImage(const char* filename, GLsizei* width, GLsizei* height) {
 		FREE_IMAGE_FORMAT fif = FIF_UNKNOWN;
 		FIBITMAP * dib = nullptr;
