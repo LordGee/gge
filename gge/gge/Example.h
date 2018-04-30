@@ -6,7 +6,7 @@
 #define EX_WINDOW_WIDTH 1920
 #define EX_WINDOW_HEIGHT 1080
 /* Setting the full screen option to 1 will void width and height */
-#define EX_FULL_SCREEN 1
+#define EX_FULL_SCREEN 0
 
 class Example : public GGEngine {
 

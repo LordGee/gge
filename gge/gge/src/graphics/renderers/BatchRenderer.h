@@ -1,8 +1,8 @@
 #pragma once
 
 #include <glew.h>
-#include "Renderer2D.h"
-#include "../renderables/Renderable2D.h"
+#include "Renderer.h"
+#include "../renderables/Renderable.h"
 #include "../buffers/IndexBuffer.h"
 
 namespace gge
@@ -21,21 +21,21 @@ namespace gge
 #define ATTR_TEXID_INDEX		2
 #define ATTR_COLOUR_INDEX		3
 
-		class BatchRenderer2D : public Renderer2D {
+		class BatchRenderer : public Renderer {
 		private:
-			GLuint					m_VAO;
-			GLuint					m_VBO;
-			IndexBuffer*			m_IBO;
+			GLuint					m_VertexArrayObject;
+			GLuint					m_VertexBufferObject;
+			IndexBuffer*			m_IndexBufferObject;
 			VertexData*				m_Buffer;
 			GLsizei					m_IndexCount;
 			std::vector<GLuint>		m_TextureSlots;
 
 		public:
-			BatchRenderer2D();
-			~BatchRenderer2D();
+			BatchRenderer();
+			~BatchRenderer();
 
 			void Begin() override;
-			void Submit(const Renderable2D* renderable) override;
+			void Submit(const Renderable* renderable) override;
 			void SubmitText(const std::string& text, const maths::Vector3& position, const Font& font, unsigned int colour) override;
 			void End() override;
 			void Flush() override;

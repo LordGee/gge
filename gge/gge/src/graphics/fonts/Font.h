@@ -10,8 +10,8 @@ namespace gge
 	{
 		class Font {
 		private:
-			ftgl::texture_atlas_t*		m_Atlas;
 			ftgl::texture_font_t*		m_Font;
+			ftgl::texture_atlas_t*		m_Atlas;
 			std::string					m_FontFile;
 			std::string					m_FontName;
 			unsigned int				m_FontSize;

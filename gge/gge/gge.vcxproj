@@ -191,7 +191,7 @@
     <ClCompile Include="src\graphics\fonts\FontManager.cpp" />
     <ClCompile Include="src\graphics\fonts\Text.cpp" />
     <ClCompile Include="src\graphics\layers\Container.cpp" />
-    <ClCompile Include="src\graphics\renderers\BatchRenderer2D.cpp" />
+    <ClCompile Include="src\graphics\renderers\BatchRenderer.cpp" />
     <ClCompile Include="src\graphics\renderables\Sprite.cpp" />
     <ClCompile Include="src\graphics\shaders\Shader.cpp" />
     <ClCompile Include="src\graphics\textures\Texture.cpp" />
@@ -240,9 +240,9 @@
     <ClInclude Include="src\graphics\fonts\FontManager.h" />
     <ClInclude Include="src\graphics\fonts\Text.h" />
     <ClInclude Include="src\graphics\layers\Container.h" />
-    <ClInclude Include="src\graphics\renderers\BatchRenderer2D.h" />
-    <ClInclude Include="src\graphics\renderables\Renderable2D.h" />
-    <ClInclude Include="src\graphics\renderers\Renderer2D.h" />
+    <ClInclude Include="src\graphics\renderers\BatchRenderer.h" />
+    <ClInclude Include="src\graphics\renderables\Renderable.h" />
+    <ClInclude Include="src\graphics\renderers\Renderer.h" />
     <ClInclude Include="src\graphics\renderables\Sprite.h" />
     <ClInclude Include="src\graphics\shaders\Shader.h" />
     <ClInclude Include="src\graphics\textures\Texture.h" />

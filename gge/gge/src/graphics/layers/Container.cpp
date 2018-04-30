@@ -1,5 +1,5 @@
 #include "Container.h"
-#include "../renderers/BatchRenderer2D.h"
+#include "../renderers/BatchRenderer.h"
 
 namespace gge
 {
@@ -8,7 +8,7 @@ namespace gge
 		Container::Container(Shader* shader) 
 			: m_Shader(shader) 
 		{
-			m_Renderer = new BatchRenderer2D();
+			m_Renderer = new BatchRenderer();
 			m_ProjectionMatrix = maths::Matrix::orthographic(-16.0f, 16.0f, -9.0f, 9.0f, -1.0f, 1.0f);
 			SetupShader();
 		}
@@ -16,11 +16,11 @@ namespace gge
 		Container::Container(Shader* shader, maths::Matrix projectionMatrix)
 			: m_Shader(shader), m_ProjectionMatrix(projectionMatrix)
 		{
-			m_Renderer = new BatchRenderer2D();
+			m_Renderer = new BatchRenderer();
 			SetupShader();
 		}
 
-		Container::Container(Renderer2D* renderer, Shader* shader, maths::Matrix projectionMatrix)
+		Container::Container(Renderer* renderer, Shader* shader, maths::Matrix projectionMatrix)
 			: m_Renderer(renderer), m_Shader(shader), m_ProjectionMatrix(projectionMatrix) 
 		{
 			SetupShader();
@@ -34,14 +34,14 @@ namespace gge
 			}
 		}
 
-		void Container::AddToContainer(Renderable2D* renderable) {
+		void Container::AddToContainer(Renderable* renderable) {
 			m_Renderables.push_back(renderable);
 		}
 
 		void Container::RenderThisContainer() {
 			m_Shader->Enable();
 			m_Renderer->Begin();
-			for (const Renderable2D* renderable : m_Renderables) {
+			for (const Renderable* renderable : m_Renderables) {
 				renderable->Submit(m_Renderer);
 			}
 			m_Renderer->End();

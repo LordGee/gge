@@ -2,7 +2,7 @@
 
 #include "../../maths/Maths.h"
 #include "../shaders/Shader.h"
-#include "../renderers/Renderer2D.h"
+#include "../renderers/Renderer.h"
 #include "../textures/Texture.h"
 
 namespace gge
@@ -16,7 +16,7 @@ namespace gge
 			unsigned int					colour;
 		};
 
-		class Renderable2D {
+		class Renderable {
 		protected:
 			maths::Vector3					m_Position;
 			maths::Vector2					m_Size;
@@ -25,19 +25,19 @@ namespace gge
 			Texture*						m_Texture;
 
 		protected:
-			Renderable2D() : m_Texture() {
+			Renderable() : m_Texture() {
 				SetTextureCoordsDefault();
 			}
 
 		public:
-			Renderable2D(maths::Vector3 position, maths::Vector2 size, unsigned int colour)
+			Renderable(maths::Vector3 position, maths::Vector2 size, unsigned int colour)
 				: m_Position(position), m_Size(size), m_Colour(colour) {
 				SetTextureCoordsDefault();
 			}
 
-			virtual ~Renderable2D() { }
+			virtual ~Renderable() { }
 
-			virtual void Submit(Renderer2D* renderer) const { renderer->Submit(this); }
+			virtual void Submit(Renderer* renderer) const { renderer->Submit(this); }
 
 			void SetColour(unsigned int colour) { m_Colour = colour; }
 			void SetColour(maths::Vector4 colour) {

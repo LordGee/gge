@@ -1,8 +1,8 @@
 #pragma once
 
 #include "../graphics/windows/Window.h"
-#include "../graphics/renderers/Renderer2D.h"
-#include "../graphics/renderers/BatchRenderer2D.h"
+#include "../graphics/renderers/Renderer.h"
+#include "../graphics/renderers/BatchRenderer.h"
 #include "../graphics/shaders/Shader.h"
 
 #include "../graphics/layers/Container.h"
@@ -84,37 +84,41 @@ namespace gge
 
 	private:
 		void Run() {
+			/* Set new Timer and initialise other variables*/
 			m_Timer = new Timer();
 			m_Time = 0.0f;
 			float updateTimer = 0.0f;
 			const float updateTick = 1.0f / 60.0f;
-			
 			unsigned int frames = 0, updates = 0;
-
+			/* Main Game Loop until Window is closed */
 			while (!m_Window->IsClosed()) {
-				
+				/* Reset Window content */
 				m_Window->WindowClear();
-
+				/* If 60 times per second */
 				if (m_Timer->Elapsed() - updateTimer > updateTick) {
+					/* Execute Update functions */
 					Update();
 					updateTimer = m_Timer->Elapsed();
 					updates++;
 				}
-
+				/* Execute the Fast Update function */
 				FastUpdate();
+				/* Execute the Render functions */
 				Render();
 				frames++;
+				/* Perform the Window update */
 				m_Window->WindowUpdate();
-
+				/* If once per second */
 				if (m_Timer->Elapsed() - m_Time > 1.0f) {
 					m_Time = m_Timer->Elapsed();
 					m_FramesPerSecond = frames;
 					m_UpdatesPerSecond = updates;
 					frames = updates = 0;
+					/* Execute the Tick functions */
 					Tick();
 				}
 			}
-
+			/* Deconstruct the Window */
 			m_Window->WindowDestroy();
 		}
 	};

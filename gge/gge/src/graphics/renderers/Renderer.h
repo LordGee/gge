@@ -8,15 +8,15 @@ namespace gge
 {
 	namespace graphics
 	{
-		class Renderable2D;
+		class Renderable;
 
-		class Renderer2D {
+		class Renderer {
 		protected:
 			std::vector<maths::Matrix>		m_TransformationStack;
 			const maths::Matrix*			m_TransformationBack;
 
 		protected:
-			Renderer2D() {
+			Renderer() {
 				m_TransformationStack.push_back(maths::Matrix::identity());
 				m_TransformationBack = &m_TransformationStack.back();
 			}
@@ -40,7 +40,7 @@ namespace gge
 			}
 
 			virtual void Begin() {}
-			virtual void Submit(const Renderable2D* renderable) = 0;
+			virtual void Submit(const Renderable* renderable) = 0;
 			virtual void SubmitText(const std::string& text, const maths::Vector3& position, const Font& font, unsigned int colour) {}
 			virtual void End() {}
 			virtual void Flush() = 0;

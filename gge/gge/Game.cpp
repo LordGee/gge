@@ -1,6 +1,6 @@
 #include "Game.h"
 
-/* Start() executes only at the start of the application*/
+/* Start() executes only at the start of the game */
 void ::Game::Start() {
 
 }

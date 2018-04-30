@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../renderers/Renderer2D.h"
-#include "../renderables/Renderable2D.h"
+#include "../renderers/Renderer.h"
+#include "../renderables/Renderable.h"
 
 namespace gge
 {
@@ -9,21 +9,21 @@ namespace gge
 	{
 		class Container {
 		protected:
-			Renderer2D *				m_Renderer;
-			std::vector<Renderable2D*>	m_Renderables;
+			Renderer *				m_Renderer;
+			std::vector<Renderable*>	m_Renderables;
 			Shader*						m_Shader;
 			maths::Matrix				m_ProjectionMatrix;
 
 		public:
 			Container(Shader* shader);
 			Container(Shader* shader, maths::Matrix projectionMatrix);
-			Container(Renderer2D* renderer, Shader* shader, maths::Matrix projectionMatrix);
+			Container(Renderer* renderer, Shader* shader, maths::Matrix projectionMatrix);
 
 			virtual ~Container();
-			virtual void AddToContainer(Renderable2D* renderable);
+			virtual void AddToContainer(Renderable* renderable);
 			virtual void RenderThisContainer();
 
-			inline const std::vector<Renderable2D*>& GetRenderables() const { return m_Renderables; }
+			inline const std::vector<Renderable*>& GetRenderables() const { return m_Renderables; }
 
 		private:
 			void SetupShader();

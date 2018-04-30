@@ -86,6 +86,4 @@ void Example::FastUpdate() {
 void Example::Render() {
 	// Render all objects held in the container
 	container->RenderThisContainer();
-
-	
 }

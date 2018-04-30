@@ -1,24 +1,24 @@
-#include "BatchRenderer2D.h"
+#include "BatchRenderer.h"
 
 namespace gge
 {
 	namespace graphics
 	{
-		BatchRenderer2D::BatchRenderer2D() {
+		BatchRenderer::BatchRenderer() {
 			Init();
 		}
 
-		BatchRenderer2D::~BatchRenderer2D() {
-			delete m_IBO;
-			glDeleteBuffers(1, &m_VBO);
+		BatchRenderer::~BatchRenderer() {
+			delete m_IndexBufferObject;
+			glDeleteBuffers(1, &m_VertexBufferObject);
 		}
 
-		void BatchRenderer2D::Init() {
-			glGenVertexArrays(1, &m_VAO);
-			glGenBuffers(1, &m_VBO);
+		void BatchRenderer::Init() {
+			glGenVertexArrays(1, &m_VertexArrayObject);
+			glGenBuffers(1, &m_VertexBufferObject);
 
-			glBindVertexArray(m_VAO);
-			glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
+			glBindVertexArray(m_VertexArrayObject);
+			glBindBuffer(GL_ARRAY_BUFFER, m_VertexBufferObject);
 			glBufferData(GL_ARRAY_BUFFER, BUFFER_SIZE, NULL, GL_DYNAMIC_DRAW);
 			
 			glEnableVertexAttribArray(ATTR_VERTEX_INDEX);
@@ -45,17 +45,17 @@ namespace gge
 				offset += 4;
 			}
 
-			m_IBO = new IndexBuffer(indicies, INDICES_SIZE);
+			m_IndexBufferObject = new IndexBuffer(indicies, INDICES_SIZE);
 
 			glBindVertexArray(0);
 		}
 
-		void BatchRenderer2D::Begin() {
-			glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
+		void BatchRenderer::Begin() {
+			glBindBuffer(GL_ARRAY_BUFFER, m_VertexBufferObject);
 			m_Buffer = (VertexData*)glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
 		}
 
-		void BatchRenderer2D::Submit(const Renderable2D* renderable) {
+		void BatchRenderer::Submit(const Renderable* renderable) {
 			const maths::Vector3& position = renderable->GetPosition();
 			const maths::Vector2& size = renderable->GetSize();
 			const unsigned int colour = renderable->GetColour();
@@ -110,7 +110,7 @@ namespace gge
 			m_IndexCount += 6;
 		}
 
-		void BatchRenderer2D::SubmitText(const std::string& text, const maths::Vector3& position, const Font& font, unsigned int colour) {
+		void BatchRenderer::SubmitText(const std::string& text, const maths::Vector3& position, const Font& font, unsigned int colour) {
 			using namespace  ftgl;
 
 			float ts = 0.0f;
@@ -187,24 +187,24 @@ namespace gge
 			}
 		}
 
-		void BatchRenderer2D::End() {
+		void BatchRenderer::End() {
 			glUnmapBuffer(GL_ARRAY_BUFFER);
 			glBindBuffer(GL_ARRAY_BUFFER, 0);
 		}
 
-		void BatchRenderer2D::Flush() {
+		void BatchRenderer::Flush() {
 
 			for (int i = 0; i < m_TextureSlots.size(); i++) {
 				glActiveTexture(GL_TEXTURE0 + i);
 				glBindTexture(GL_TEXTURE_2D, m_TextureSlots[i]);
 			}
 
-			glBindVertexArray(m_VAO);
-			m_IBO->BindIndexBuffer();
+			glBindVertexArray(m_VertexArrayObject);
+			m_IndexBufferObject->BindIndexBuffer();
 
 			glDrawElements(GL_TRIANGLES, m_IndexCount, GL_UNSIGNED_INT, NULL);
 
-			m_IBO->UnbindIndexBuffer();
+			m_IndexBufferObject->UnbindIndexBuffer();
 			glBindVertexArray(0);
 
 			m_IndexCount = 0;
