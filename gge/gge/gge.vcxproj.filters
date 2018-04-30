@@ -183,9 +183,6 @@
     <ClInclude Include="Game.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\graphics\layers\Container.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\graphics\renderables\Renderable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -193,6 +190,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\graphics\renderers\BatchRenderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\containers\Container.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -204,8 +204,6 @@
     <None Include="FreeImage.dll" />
     <None Include="src\shaders\light.frag" />
     <None Include="audio\BeBop.ogg" />
-    <None Include="res\GorillaAudio\lib\win32\Debug\gorillaD.idb" />
-    <None Include="res\GorillaAudio\lib\win32\Debug\gorillad.pdb" />
     <None Include="res\GorillaAudio\lib\win32\Rel\gorilla.idb" />
     <None Include="res\GorillaAudio\lib\win32\Rel\gorilla.pdb" />
   </ItemGroup>
@@ -215,13 +213,9 @@
     <Library Include="res\GLEW\lib\glew32.lib" />
     <Library Include="res\GLEW\lib\glew32s.lib" />
     <Library Include="res\FreeImage\lib\FreeImage.lib" />
-    <Library Include="res\GorillaAudio\lib\win32\Debug\gorillaD.lib" />
     <Library Include="res\GorillaAudio\lib\win32\Rel\gorilla.lib" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\maths\Vector2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -399,10 +393,10 @@
     <ClCompile Include="Example.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\graphics\layers\Container.cpp">
+    <ClCompile Include="src\graphics\renderers\BatchRenderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\graphics\renderers\BatchRenderer.cpp">
+    <ClCompile Include="src\graphics\containers\Container.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

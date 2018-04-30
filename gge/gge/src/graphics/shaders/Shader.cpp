@@ -75,6 +75,7 @@ namespace gge
 		}
 
 		GLuint Shader::LoadInShader() {
+
 			GLuint program = glCreateProgram();
 			GLuint vertex = glCreateShader(GL_VERTEX_SHADER);
 			GLuint fragment = glCreateShader(GL_FRAGMENT_SHADER);

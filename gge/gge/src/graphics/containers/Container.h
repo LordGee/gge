@@ -9,7 +9,7 @@ namespace gge
 	{
 		class Container {
 		protected:
-			Renderer *				m_Renderer;
+			Renderer *					m_Renderer;
 			std::vector<Renderable*>	m_Renderables;
 			Shader*						m_Shader;
 			maths::Matrix				m_ProjectionMatrix;

@@ -13,7 +13,6 @@ namespace gge
 	{
 		class Window {
 		private:
-			GLFWmonitor *	m_Monitor;
 			GLFWwindow *	m_Window;
 			const char*		m_Title;
 			int				m_Width, m_Height;

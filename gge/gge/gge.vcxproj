@@ -183,14 +183,13 @@
     <ClCompile Include="ext\FreeType\src\type42\type42.c" />
     <ClCompile Include="ext\FreeType\src\winfonts\winfnt.c" />
     <ClCompile Include="Game.cpp" />
-    <ClCompile Include="Main.cpp" />
     <ClCompile Include="src\audio\Audio.cpp" />
     <ClCompile Include="src\audio\AudioManager.cpp" />
     <ClCompile Include="src\graphics\buffers\IndexBuffer.cpp" />
     <ClCompile Include="src\graphics\fonts\Font.cpp" />
     <ClCompile Include="src\graphics\fonts\FontManager.cpp" />
     <ClCompile Include="src\graphics\fonts\Text.cpp" />
-    <ClCompile Include="src\graphics\layers\Container.cpp" />
+    <ClCompile Include="src\graphics\containers\Container.cpp" />
     <ClCompile Include="src\graphics\renderers\BatchRenderer.cpp" />
     <ClCompile Include="src\graphics\renderables\Sprite.cpp" />
     <ClCompile Include="src\graphics\shaders\Shader.cpp" />
@@ -239,7 +238,7 @@
     <ClInclude Include="src\graphics\fonts\Font.h" />
     <ClInclude Include="src\graphics\fonts\FontManager.h" />
     <ClInclude Include="src\graphics\fonts\Text.h" />
-    <ClInclude Include="src\graphics\layers\Container.h" />
+    <ClInclude Include="src\graphics\containers\Container.h" />
     <ClInclude Include="src\graphics\renderers\BatchRenderer.h" />
     <ClInclude Include="src\graphics\renderables\Renderable.h" />
     <ClInclude Include="src\graphics\renderers\Renderer.h" />
@@ -263,8 +262,6 @@
     <None Include="FreeImage.dll" />
     <None Include="res\FreeImage\bin\FreeImage.dll" />
     <None Include="res\GLFW\lib\glfw3.dll" />
-    <None Include="res\GorillaAudio\lib\win32\Debug\gorillaD.idb" />
-    <None Include="res\GorillaAudio\lib\win32\Debug\gorillad.pdb" />
     <None Include="res\GorillaAudio\lib\win32\Rel\gorilla.idb" />
     <None Include="res\GorillaAudio\lib\win32\Rel\gorilla.pdb" />
     <None Include="src\shaders\basic.frag" />
@@ -277,7 +274,6 @@
     <Library Include="res\GLEW\lib\glew32s.lib" />
     <Library Include="res\GLFW\lib\glfw3.lib" />
     <Library Include="res\GLFW\lib\glfw3dll.lib" />
-    <Library Include="res\GorillaAudio\lib\win32\Debug\gorillaD.lib" />
     <Library Include="res\GorillaAudio\lib\win32\Rel\gorilla.lib" />
   </ItemGroup>
   <ItemGroup>

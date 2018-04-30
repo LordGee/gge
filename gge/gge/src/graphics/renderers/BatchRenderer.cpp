@@ -14,25 +14,42 @@ namespace gge
 		}
 
 		void BatchRenderer::Init() {
+			/* Returns vertex array object names */
 			glGenVertexArrays(1, &m_VertexArrayObject);
+			/* Returns buffer object names */
 			glGenBuffers(1, &m_VertexBufferObject);
-
+			/* Binds the vertex array object with name */
 			glBindVertexArray(m_VertexArrayObject);
+			/* Binds a buffer object to the specified buffer
+			 * binding point */
 			glBindBuffer(GL_ARRAY_BUFFER, m_VertexBufferObject);
-			glBufferData(GL_ARRAY_BUFFER, BUFFER_SIZE, NULL, GL_DYNAMIC_DRAW);
-			
+			/* Create a new data store for a buffer object */
+			glBufferData(GL_ARRAY_BUFFER, BUFFER_SIZE, NULL,
+				GL_DYNAMIC_DRAW);
+			/* Enable the generic vertex attribute array specified
+			 * by index */
 			glEnableVertexAttribArray(ATTR_VERTEX_INDEX);
 			glEnableVertexAttribArray(ATTR_COLOUR_INDEX);
 			glEnableVertexAttribArray(ATTR_UV_INDEX);
 			glEnableVertexAttribArray(ATTR_TEXID_INDEX);
-			
-			glVertexAttribPointer(ATTR_VERTEX_INDEX, 3, GL_FLOAT, GL_FALSE, VERTEX_SIZE, (const GLvoid*)0);
-			glVertexAttribPointer(ATTR_COLOUR_INDEX, 4, GL_UNSIGNED_BYTE, GL_TRUE, VERTEX_SIZE, (const GLvoid*)(offsetof(VertexData, VertexData::colour)));
-			glVertexAttribPointer(ATTR_UV_INDEX, 2, GL_FLOAT, GL_FALSE, VERTEX_SIZE, (const GLvoid*)(offsetof(VertexData, VertexData::textureCoord)));
-			glVertexAttribPointer(ATTR_TEXID_INDEX, 1, GL_FLOAT, GL_FALSE, VERTEX_SIZE, (const GLvoid*)(offsetof(VertexData, VertexData::textureID)));
-
+			/* Specify the location and data format of the
+			 * array of generic vertex attributes at index to use
+			 * when rendering */
+			glVertexAttribPointer(ATTR_VERTEX_INDEX, 3, GL_FLOAT,
+				GL_FALSE, VERTEX_SIZE, (const GLvoid*)0);
+			glVertexAttribPointer(ATTR_COLOUR_INDEX, 4, GL_UNSIGNED_BYTE,
+				GL_TRUE, VERTEX_SIZE,
+				(const GLvoid*)(offsetof(VertexData, VertexData::colour)));
+			glVertexAttribPointer(ATTR_UV_INDEX, 2, GL_FLOAT,
+				GL_FALSE, VERTEX_SIZE,
+				(const GLvoid*)(offsetof(VertexData, VertexData::textureCoord)));
+			glVertexAttribPointer(ATTR_TEXID_INDEX, 1, GL_FLOAT,
+				GL_FALSE, VERTEX_SIZE,
+				(const GLvoid*)(offsetof(VertexData, VertexData::textureID)));
+			/* Unbinds a buffer object */
 			glBindBuffer(GL_ARRAY_BUFFER, 0);
-
+			/* Generates the indicies values that will draw
+			 * two triagles to make a square */
 			GLuint* indicies = new GLuint[INDICES_SIZE];
 			int offset = 0;
 			for (int i = 0; i < INDICES_SIZE; i += 6) {
@@ -44,24 +61,29 @@ namespace gge
 				indicies[i + 5] = offset + 0;
 				offset += 4;
 			}
-
+			/* Create instance of the IndexBuffer pasiing over the indicies
+			 * data and size */
 			m_IndexBufferObject = new IndexBuffer(indicies, INDICES_SIZE);
-
+			/* Unbinds the vertex array object */
 			glBindVertexArray(0);
 		}
 
 		void BatchRenderer::Begin() {
+			/* Binds a buffer object to the specified buffer binding point */
 			glBindBuffer(GL_ARRAY_BUFFER, m_VertexBufferObject);
+			/* Map the entire data store of a specified buffer object */
 			m_Buffer = (VertexData*)glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
 		}
 
 		void BatchRenderer::Submit(const Renderable* renderable) {
+			// Set values based on renderable object
 			const maths::Vector3& position = renderable->GetPosition();
 			const maths::Vector2& size = renderable->GetSize();
 			const unsigned int colour = renderable->GetColour();
 			const std::vector<maths::Vector2>& uv = renderable->GetUV();
 			const GLuint textureID = renderable->GetTextureID();
-			
+
+			// Identify Texture ID
 			float textureSlot = 0.0f;
 			if (textureID > 0) {
 				bool found = false;
@@ -72,41 +94,40 @@ namespace gge
 						break;
 					}
 				}
+				// if not found add to array
 				if (!found) {
+					// if max textures, then end, flush and begin
 					if (m_TextureSlots.size() >= MAXIMUM_TEXTURES) {
 						End();
 						Flush();
 						Begin();
 					}
+					
 					m_TextureSlots.push_back(textureID);
 					textureSlot = (float)m_TextureSlots.size();
 				}
 			} 
-
+			// Set Vertex Data values
 			m_Buffer->vertex = *m_TransformationBack * position;
 			m_Buffer->textureCoord = uv[0];
 			m_Buffer->textureID = textureSlot;
 			m_Buffer->colour = colour;
 			m_Buffer++;
-
 			m_Buffer->vertex = *m_TransformationBack * maths::Vector3(position.x, position.y + size.y, position.z);
 			m_Buffer->textureCoord = uv[1];
 			m_Buffer->textureID = textureSlot;
 			m_Buffer->colour = colour;
 			m_Buffer++;
-
 			m_Buffer->vertex = *m_TransformationBack * maths::Vector3(position.x + size.x, position.y + size.y, position.z);
 			m_Buffer->textureCoord = uv[2];
 			m_Buffer->textureID = textureSlot;
 			m_Buffer->colour = colour;
 			m_Buffer++;
-
 			m_Buffer->vertex = *m_TransformationBack * maths::Vector3(position.x + size.x, position.y, position.z);
 			m_Buffer->textureCoord = uv[3];
 			m_Buffer->textureID = textureSlot;
 			m_Buffer->colour = colour;
 			m_Buffer++;
-
 			m_IndexCount += 6;
 		}
 
@@ -131,11 +152,8 @@ namespace gge
 				m_TextureSlots.push_back(font.GetFontID());
 				ts = (float)m_TextureSlots.size();
 			}
-
 			const maths::Vector2& scale = font.GetScale();
-			
 			float x = position.x;
-
 			texture_font_t* ftFont = font.GetFont();
 
 			for (int i = 0; i < text.length(); i++) {
@@ -162,25 +180,21 @@ namespace gge
 					m_Buffer->textureID = ts;
 					m_Buffer->colour = colour;
 					m_Buffer++;
-
 					m_Buffer->vertex = *m_TransformationBack * maths::Vector3(x0, y1, 0);
 					m_Buffer->textureCoord = maths::Vector2(u0, v1);
 					m_Buffer->textureID = ts;
 					m_Buffer->colour = colour;
 					m_Buffer++;
-
 					m_Buffer->vertex = *m_TransformationBack * maths::Vector3(x1, y1, 0);
 					m_Buffer->textureCoord = maths::Vector2(u1, v1);
 					m_Buffer->textureID = ts;
 					m_Buffer->colour = colour;
 					m_Buffer++;
-
 					m_Buffer->vertex = *m_TransformationBack * maths::Vector3(x1, y0, 0);
 					m_Buffer->textureCoord = maths::Vector2(u1, v0);
 					m_Buffer->textureID = ts;
 					m_Buffer->colour = colour;
 					m_Buffer++;
-
 					m_IndexCount += 6;
 					x += glyph->advance_x / scale.x;
 				}
@@ -188,26 +202,31 @@ namespace gge
 		}
 
 		void BatchRenderer::End() {
+			/* Unmaps the buffer array */
 			glUnmapBuffer(GL_ARRAY_BUFFER);
+			/* Unbinds the buffer array */
 			glBindBuffer(GL_ARRAY_BUFFER, 0);
 		}
 
 		void BatchRenderer::Flush() {
-
+			/* Binds and Activates all Textures */
 			for (int i = 0; i < m_TextureSlots.size(); i++) {
 				glActiveTexture(GL_TEXTURE0 + i);
 				glBindTexture(GL_TEXTURE_2D, m_TextureSlots[i]);
 			}
-
+			/* Binds the Vertex array object */
 			glBindVertexArray(m_VertexArrayObject);
+			/* Bind the index buffer */
 			m_IndexBufferObject->BindIndexBuffer();
-
+			/* Draw all elemets */
 			glDrawElements(GL_TRIANGLES, m_IndexCount, GL_UNSIGNED_INT, NULL);
-
+			/* Unbind Index Buffer */
 			m_IndexBufferObject->UnbindIndexBuffer();
+			/* Unbind Vertex Array */
 			glBindVertexArray(0);
-
+			/* Reset index count to 0 ready for next frame */
 			m_IndexCount = 0;
+			/* Clear all texture slots */
 			m_TextureSlots.clear();
 		}
 	}

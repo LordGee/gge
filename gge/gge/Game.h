@@ -12,23 +12,23 @@
 #define WINDOW_HEIGHT 1080
 
 class Game : public GGEngine {
-
 private:
 	Window *			m_Window;
 
 public:
 	Game() {
-		m_Window = CreateWindow(GAME_NAME, WINDOW_WIDTH, WINDOW_HEIGHT);
+		m_Window = CreateWindow(
+			GAME_NAME, 
+			WINDOW_WIDTH, 
+			WINDOW_HEIGHT
+		);
 	}
-
 	~Game() { }
-
 	void Start() override;
 	void Tick() override;
 	void Update() override;
 	void FastUpdate() override;
 	void Render() override;
-
 };
 
 #if 1

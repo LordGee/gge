@@ -48,13 +48,13 @@ namespace gge
 		/* Initialise a new Window called from the Window Constructor */
 		bool Window::Init() {
 			if (!glfwInit()) { // Intialise GLFW
-				
 				std::cerr << "Error Initialising GLFW!" << std::endl;
 				return false;
 			}
-			/*Gets the primary monitor used by the user only used if full screen option is selected */
-			m_Monitor = glfwGetPrimaryMonitor();
+			
 			if (m_FullScreen) {
+				/* Gets the primary monitor used by the user only used if full screen option is selected */
+				GLFWmonitor* m_Monitor = glfwGetPrimaryMonitor();
 				const GLFWvidmode* mode = glfwGetVideoMode(m_Monitor);
 				/* resets the width and height to the size of the monitor */
 				m_Width = mode->width;
@@ -70,7 +70,7 @@ namespace gge
 				std::cerr << "Failed to create GLFW Window!" << std::endl;
 				return false;
 			}
-			/* 	Makes the context of the specified window current for the calling thread. */
+			/* Makes the context of the specified window current for the calling thread. */
 			glfwMakeContextCurrent(m_Window);
 			/* Makes the pointer available in the context window, this is useful to ensure pointer access in full screen mode */
 			glfwSetWindowUserPointer(m_Window, this);
