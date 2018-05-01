@@ -14,31 +14,29 @@ private:
 	Window *					window;
 	Shader*						shader;
 	std::vector<Texture*>		images;
-	Container*					container;
+	Container*					bucket;
 	Sprite*						square;
 	Sprite*						fpsBackground;
 	Text*						fpsHeading;
 	Text*						fpsCounter;
-	Audio*						sfxAudio;
-	Audio*						mainAudio;
-
-	const float speed = 0.5f;
+//	Audio*						sfxAudio;
+//	Audio*						mainAudio;
+	const float					speed = 0.5f;
 
 public:
 	Example() {
-		window = CreateWindow(EX_GAME_NAME, EX_WINDOW_WIDTH, EX_WINDOW_HEIGHT, EX_FULL_SCREEN);
-		FontManager::GetFont()->SetScale(window->GetWindowWidth() / 32, window->GetWindowHeight() / 18);
+		window = CreateWindow(EX_GAME_NAME, EX_WINDOW_WIDTH, EX_WINDOW_HEIGHT);
+		FontManager::GetFont()->SetScale(window->GetWindowWidth() / 32, 
+			window->GetWindowHeight() / 18);
 	}
 	~Example() {
 		for (int i = 0; i < images.size(); i++) {
 			delete images[i];
 		}
 	}
-
 	void Start() override;
 	void Tick() override;
 	void Update() override;
 	void FastUpdate() override;
 	void Render() override;
-
 };

@@ -74,47 +74,63 @@ namespace gge
 			glUseProgram(0);
 		}
 
-		GLuint Shader::LoadInShader() {
-
-			GLuint program = glCreateProgram();
-			GLuint vertex = glCreateShader(GL_VERTEX_SHADER);
-			GLuint fragment = glCreateShader(GL_FRAGMENT_SHADER);
-
-			std::string vertSourceString = ReadFile(m_VertexPath);
-			std::string fragSourceString = ReadFile(m_FragmentPath);
-
-			const char* vertexSource = vertSourceString.c_str();
-			const char* fragmentSource = fragSourceString.c_str();
-
-			glShaderSource(vertex, 1, &vertexSource, NULL);
-			glCompileShader(vertex);
-			GLint result;
-			glGetShaderiv(vertex, GL_COMPILE_STATUS, &result);
-			if (result == GL_FALSE) {
-				HandleShaderError(vertex);
-				return 0;
-			}
-
-			glShaderSource(fragment, 1, &fragmentSource, NULL);
-			glCompileShader(fragment);
-			result = NULL;
-			glGetShaderiv(fragment, GL_COMPILE_STATUS, &result);
-			if (result == GL_FALSE) {
-				HandleShaderError(fragment);
-				return 0;
-			}
-
-			glAttachShader(program, vertex);
-			glAttachShader(program, fragment);
-
-			glLinkProgram(program);
-			glValidateProgram(program);
-
-			glDeleteShader(vertex);
-			glDeleteShader(fragment);
-
-			return program;
-		}
+GLuint Shader::LoadInShader() {
+	/* Creates an empty program object and returns a 
+	 * non-zero value by which it can be referenced */
+	GLuint program = glCreateProgram();
+	/* Creates an empty shader object and returns a 
+	 * non-zero value by which it can be referenced */
+	GLuint vertex = glCreateShader(GL_VERTEX_SHADER);
+	GLuint fragment = glCreateShader(GL_FRAGMENT_SHADER);
+	/* Loads in the shader and stored in a string variable */
+	std::string vertSourceString = ReadFile(m_VertexPath);
+	std::string fragSourceString = ReadFile(m_FragmentPath);
+	/* Convert string to a const char* */
+	const char* vertexSource = vertSourceString.c_str();
+	const char* fragmentSource = fragSourceString.c_str();
+	/* Sets the source code in shader to the vertex shader and sets 
+	 * the source code to the value the from the vertex file */
+	glShaderSource(vertex, 1, &vertexSource, NULL);
+	/* Compiles the source code that have been stored in the 
+	 * vertex shader object */
+	glCompileShader(vertex);
+	GLint result;
+	/* Gets the vertex shaders, compile status which returns 
+	 * GL_TRUE if the last compile operation on shader was 
+	 * successful, and GL_FALSE otherwise */
+	glGetShaderiv(vertex, GL_COMPILE_STATUS, &result);
+	if (result == GL_FALSE) {
+		HandleShaderError(vertex);
+		return 0;
+	}
+	/* Sets the source code in shader to the fragment shader and sets
+	* the source code to the value the from the fragment file */
+	glShaderSource(fragment, 1, &fragmentSource, NULL);
+	/* Compiles the source code that have been stored in the
+	* fragment shader object */
+	glCompileShader(fragment);
+	result = NULL;
+	/* Gets the fragment shaders, compile status which returns
+	* GL_TRUE if the last compile operation on shader was
+	* successful, and GL_FALSE otherwise */
+	glGetShaderiv(fragment, GL_COMPILE_STATUS, &result);
+	if (result == GL_FALSE) {
+		HandleShaderError(fragment);
+		return 0;
+	}
+	/* Attaches the shader to the specified program object */
+	glAttachShader(program, vertex);
+	glAttachShader(program, fragment);
+	/* Links the program object specified */
+	glLinkProgram(program);
+	/* Checks to see whether the executables contained in program 
+	 * can execute given the current OpenGL state */
+	glValidateProgram(program);
+	/* Deletes the no longer need shader IDs */
+	glDeleteShader(vertex);
+	glDeleteShader(fragment);
+	return program;
+}
 
 		void Shader::HandleShaderError(GLuint id) {
 			GLint length;

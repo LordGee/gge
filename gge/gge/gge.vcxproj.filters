@@ -195,6 +195,9 @@
     <ClInclude Include="src\graphics\containers\Container.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CarGame.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\GLFW\lib\glfw3.dll" />
@@ -399,6 +402,9 @@
     <ClCompile Include="src\graphics\containers\Container.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CarGame.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="img\test.png">
@@ -411,6 +417,9 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="img\test4.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="img\car_right2.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

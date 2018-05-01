@@ -19,6 +19,7 @@ namespace gge
 		public:
 			Texture(const std::string filepath);
 			~Texture();
+
 			void BindTexture() const;
 			void UnbindTexture() const;
 

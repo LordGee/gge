@@ -32,7 +32,7 @@ namespace gge
 			/* Initialise font manager */
 			FontManager::FontManagerInit();
 			/* Initialise audio manager */
-			audio::AudioManager::AudioInit();
+//TODO			audio::AudioManager::AudioInit();
 		}
 
 		/* deconstructor */
@@ -42,7 +42,7 @@ namespace gge
 			/* Destroy all loaded fonts inc custom */
 			FontManager::TeminateAllFonts();
 			/* Remove all audio clips from the audio manager */
-			audio::AudioManager::TerminateAudioClips();
+//TODO			audio::AudioManager::TerminateAudioClips();
 		}
 
 		/* Initialise a new Window called from the Window Constructor */
@@ -117,7 +117,7 @@ namespace gge
 			}
 			memcpy(m_MouseState, m_MouseButtons, MAX_BUTTONS * sizeof(bool));
 			/* Updates any audio sounds that are currently playing */
-			audio::AudioManager::UpdateAudio();
+//TODO			audio::AudioManager::UpdateAudio();
 			/* Logger for any OpenGL errors */
 			GLenum error = glGetError();
 			if (error != GL_NO_ERROR) {

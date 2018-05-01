@@ -29,7 +29,7 @@ namespace gge
 			double			m_X, m_Y;
 
 		public:
-			Window(const char* name, int width, int height, bool fullScreen);
+			Window(const char* name, int width, int height, bool fullScreen = false);
 			~Window();
 			bool IsClosed();
 			void WindowClear();

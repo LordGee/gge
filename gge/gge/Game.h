@@ -3,7 +3,7 @@
 #include <GGEngine.h>
 
 /* Set Define to 0 to execute the example project, else set to 0 */
-#include "Example.h"
+#include "CarGame.h"
 #define EXECUTE_EXAMPLE_PROJECT 1
 
 
@@ -34,7 +34,7 @@ public:
 #if 1
 int main() {
 #if EXECUTE_EXAMPLE_PROJECT
-	Example game;
+	CarGame game;
 #else
 	Game game;
 #endif

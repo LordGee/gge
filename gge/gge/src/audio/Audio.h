@@ -1,3 +1,4 @@
+#if 0
 #pragma once
 
 #include <string>
@@ -63,3 +64,4 @@ namespace gge
 
 	}
 }
+#endif

@@ -38,7 +38,8 @@
 using namespace gge;
 using namespace graphics;
 using namespace maths;
-using namespace audio;
+// TODO: Add audio namespace back in once fixed
+// using namespace audio;
 
 
 
@@ -81,6 +82,7 @@ namespace gge
 
 		const unsigned int GetFramesPerSecond() { return m_FramesPerSecond; }
 		const unsigned int GetUpdatesPerSecond() { return m_UpdatesPerSecond; }
+		const float GetTimer() { return m_Timer->Elapsed(); }
 
 	private:
 		void Run() {
