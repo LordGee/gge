@@ -107,7 +107,7 @@ namespace gge
 					textureSlot = (float)m_TextureSlots.size();
 				}
 			} 
-			// Set Vertex Data values
+			// Set Vertex Data values at each four points
 			m_Buffer->vertex = *m_TransformationBack * position;
 			m_Buffer->textureCoord = uv[0];
 			m_Buffer->textureID = textureSlot;
@@ -132,49 +132,68 @@ namespace gge
 		}
 
 		void BatchRenderer::SubmitText(const std::string& text, const maths::Vector3& position, const Font& font, unsigned int colour) {
-			using namespace  ftgl;
-
+			/* Initilase texture slot value to 0.0 */
 			float ts = 0.0f;
+			/* Initialise found value to false */
 			bool found = false;
+			/* Iterate through texture slots */
 			for (int i = 0; i < m_TextureSlots.size(); i++) {
 				if (m_TextureSlots[i] == font.GetFontID()) {
+					/* if the texture slot value is the same as the texture 
+					 * ID then the texture has been found*/
 					ts = (float)(i + 1);
 					found = true;
 					break;
 				}
 			}
 			if (!found) {
+				/* If the texture ID has not been found in the current array */
 				if (m_TextureSlots.size() >= MAXIMUM_TEXTURES) {
+					/* If the amount of textures in the array exceed the maximum 
+					 * amount of texture, the whats already in there gets commited 
+					 * and emptied before any textures get added */
 					End();
 					Flush();
 					Begin();
 				}
+				/* Add new font id to the texture slot array */
 				m_TextureSlots.push_back(font.GetFontID());
+				/* Set the texture slot value as the newly create index value */
 				ts = (float)m_TextureSlots.size();
 			}
+			/* Define the scale of the window */
 			const maths::Vector2& scale = font.GetScale();
+			/* Set starting x position */
 			float x = position.x;
-			texture_font_t* ftFont = font.GetFont();
-
+			/* Get the font required */
+			ftgl::texture_font_t* ftFont = font.GetFont();
+			/* Iterate through each character */
 			for (int i = 0; i < text.length(); i++) {
-
+				/* Get one character ata time */
 				char character = text[i];
-				texture_glyph_t* glyph = texture_font_get_glyph(ftFont, character);
+				/* Get the correct character from the font glyphs */
+				ftgl::texture_glyph_t* glyph = texture_font_get_glyph(ftFont, character);
 				if (glyph != NULL) {
+					/* If the character is valid */
 					if (i > 0) {
+						/* If the character being drawn is not the first character then 
+						 * the x position needs to move across for the next character to 
+						 * have appropriate spacing, without this all the character will 
+						 * be drawn on top of each other */
 						float kerning = texture_glyph_get_kerning(glyph, text[i - 1]);
 						x += kerning / scale.x;
 					}
+					/* Configure the x y position that the glyph will be drawn to ensure each character is in line */
 					float x0 = x + glyph->offset_x / scale.x;
 					float y0 = position.y + glyph->offset_y / scale.y;
 					float x1 = x0 + glyph->width / scale.x;
 					float y1 = y0 - glyph->height / scale.y;
-
+					/* Configure the x y position of the texture */
 					float u0 = glyph->s0;
 					float v0 = glyph->t0;
 					float u1 = glyph->s1;
 					float v1 = glyph->t1;
-
+					// Set Vertex Data values at each four points
 					m_Buffer->vertex = *m_TransformationBack * maths::Vector3(x0, y0, 0);
 					m_Buffer->textureCoord = maths::Vector2(u0, v0);
 					m_Buffer->textureID = ts;
@@ -196,6 +215,7 @@ namespace gge
 					m_Buffer->colour = colour;
 					m_Buffer++;
 					m_IndexCount += 6;
+					/* Advance the x position ready for the next iteration */
 					x += glyph->advance_x / scale.x;
 				}
 			}

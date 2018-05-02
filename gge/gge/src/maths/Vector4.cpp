@@ -1,5 +1,6 @@
 #include "Vector4.h"
 
+/* Reference (Cherno, 2018) full ref found in report */
 namespace gge
 {
 	namespace maths

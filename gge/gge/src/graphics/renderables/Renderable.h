@@ -41,6 +41,7 @@ namespace gge
 
 			void SetColour(unsigned int colour) { m_Colour = colour; }
 			void SetColour(maths::Vector4 colour) {
+				/* Convert a Vector4 value to an unsigned integer */
 				int r = colour.x * 255.0f;
 				int g = colour.y * 255.0f;
 				int b = colour.z * 255.0f;
@@ -57,6 +58,7 @@ namespace gge
 
 		private:
 			void SetTextureCoordsDefault() {
+				/* Define standard texture coordinates */
 				m_TextureCoord.push_back(maths::Vector2(0, 0));
 				m_TextureCoord.push_back(maths::Vector2(0, 1));
 				m_TextureCoord.push_back(maths::Vector2(1, 1));

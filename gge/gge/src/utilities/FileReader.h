@@ -6,6 +6,7 @@
 
 namespace gge
 {
+	/* Reads in a text file and returns as a string, this is used for the shader load */
 	static std::string ReadFile(const char* filepath) {
 		std::ifstream file(filepath);
 		std::string line;

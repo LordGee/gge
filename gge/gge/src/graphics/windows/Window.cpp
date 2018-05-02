@@ -6,6 +6,7 @@ namespace gge
 {
 	namespace graphics
 	{
+		/* Define callback functions */
 		void Callback_WindowResize(GLFWwindow *window, int width, int height);
 		void Callback_KeyPress(GLFWwindow* window, int key, int scancode, int action, int mods);
 		void Callback_MouseButton(GLFWwindow* window, int button, int action, int mods);
@@ -110,7 +111,6 @@ namespace gge
 				m_KeyHeld[i] = m_Keys[i] && !m_KeyState[i];
 			}
 			memcpy(m_KeyState, m_Keys, MAX_KEYS * sizeof(bool));
-
 			/* Checks the current state of any mouse button presses */
 			for (int i = 0; i < MAX_BUTTONS; i++) {
 				m_MouseHeld[i] = m_MouseButtons[i] && !m_MouseState[i];

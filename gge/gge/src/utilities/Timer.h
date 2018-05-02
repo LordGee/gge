@@ -18,6 +18,7 @@ namespace gge
 			m_Start = std::chrono::high_resolution_clock::now();
 		}
 
+		/* Returns the time alapsed since start of app as a float */
 		float Elapsed() {
 			return std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(std::chrono::high_resolution_clock::now() - m_Start).count() / 1000.0f;
 		}

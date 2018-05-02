@@ -35,6 +35,7 @@ namespace gge
 		}
 
 		void Text::Submit(Renderer* renderer) const {
+			/* Submitted to a special text renderering function */
 			renderer->SubmitText(text, position, *font, m_Colour);
 		}
 

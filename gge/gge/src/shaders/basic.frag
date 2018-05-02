@@ -1,3 +1,4 @@
+/* Reference (Cherno, 2018) full ref found in report */
 #version 330 core
 
 layout (location = 0) out vec4 color;
